@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Code">
+      <UniqueIdentifier>{908a1a99-1de6-45df-addd-1fbca21c1ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{b2740be0-9495-4573-bfed-8d89a170f4c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\SddItem">
+      <UniqueIdentifier>{a4fa020c-2368-447e-af28-a7dc94a851f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\SddObject">
+      <UniqueIdentifier>{e8479a48-e6c7-4d42-819e-50425357ff6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\SddEndian">
+      <UniqueIdentifier>{dc0dac41-f7ff-495c-970d-2b5e8afd104a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\SddItem\SddBitItem">
+      <UniqueIdentifier>{e0141a01-6a2a-4cf1-8c42-f758626710fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\ParsePackage">
+      <UniqueIdentifier>{684613bb-1274-4aa7-8767-92eb32943070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\ParsePackage\FixedHeadAndTailPack">
+      <UniqueIdentifier>{ac4078bb-dbe3-480e-a12b-bf8f49ad272e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\ParsePackage\SpecialPack">
+      <UniqueIdentifier>{900c1184-09b1-45db-ac9e-e9b798306dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Buffer">
+      <UniqueIdentifier>{8acb6f04-8a86-4f3d-ae25-a6e595302bf8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\SddItem\SddStringItem.cpp">
+      <Filter>Code\SddItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddObject\SddBase.cpp">
+      <Filter>Code\SddObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddEndian\SddEndianBase.cpp">
+      <Filter>Code\SddEndian</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddEndian\SddEndianBig.cpp">
+      <Filter>Code\SddEndian</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddEndian\SddEndianLittle.cpp">
+      <Filter>Code\SddEndian</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddEndian\SddEndianNo.cpp">
+      <Filter>Code\SddEndian</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddDoubleItem.cpp">
+      <Filter>Code\SddItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddFloatItem.cpp">
+      <Filter>Code\SddItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddChunkItem.cpp">
+      <Filter>Code\SddItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddPlaceholderItem.cpp">
+      <Filter>Code\SddItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddEndian\SddEndianManage.cpp">
+      <Filter>Code\SddEndian</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddBitItem\SddBitItem.cpp">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddBitItem\SddBoolBit.cpp">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\SddItem\SddBitItem\SddCharBit.cpp">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\ParsePackage\PackFactory.cpp">
+      <Filter>Code\ParsePackage</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.cpp">
+      <Filter>Code\ParsePackage\FixedHeadAndTailPack</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Buffer\Buffer.cpp">
+      <Filter>Code\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Buffer\BuffReader.cpp">
+      <Filter>Code\Buffer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\SddException.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddStringItem.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddObject\SddInterface.h">
+      <Filter>Code\SddObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddObject\SddBase.h">
+      <Filter>Code\SddObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddHead.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddEndian\SddEndianBase.h">
+      <Filter>Code\SddEndian</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddEndian\SddEndianBig.h">
+      <Filter>Code\SddEndian</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddEndian\SddEndianLittle.h">
+      <Filter>Code\SddEndian</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddEndian\SddEndianNo.h">
+      <Filter>Code\SddEndian</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddIntegerItem.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddFloatItem.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddDoubleItem.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddChunkItem.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddPlaceholderItem.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddItemBase.h">
+      <Filter>Code\SddItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddEndian\SddEndianManage.h">
+      <Filter>Code\SddEndian</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddBitItem\SddBitItem.h">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddBitItem\SddBoolBit.h">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddBitItem\SddCharBit.h">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\ParsePackBase.h">
+      <Filter>Code\ParsePackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\PackFactory.h">
+      <Filter>Code\ParsePackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\DealPackInterface.h">
+      <Filter>Code\ParsePackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.h">
+      <Filter>Code\ParsePackage\FixedHeadAndTailPack</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Buffer\Buffer.h">
+      <Filter>Code\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Buffer\BuffReader.h">
+      <Filter>Code\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddBitItem\SddBitInterface.h">
+      <Filter>Code\SddItem\SddBitItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Buffer\BufferBase.h">
+      <Filter>Code\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Buffer\BuffReaderBase.h">
+      <Filter>Code\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TestSdd.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\SpecialPack\PackHeadBase.h">
+      <Filter>Code\ParsePackage\SpecialPack</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\SpecialPack\PackTailBase.h">
+      <Filter>Code\ParsePackage\SpecialPack</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\PackBase.h">
+      <Filter>Code\ParsePackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TestPackAndUnpack.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ParsePackage\PackFactBase.h">
+      <Filter>Code\ParsePackage</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TypeDefine.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -96,4 +96,26 @@ namespace jaf
 		return true;
 	}
 
+	bool CBuffReader::SeekAtOffset(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex)
+	{
+		for (size_t i = m_nReadOffset; i < m_nLength; ++i)
+		{
+			size_t j = 0;
+			for (; j < nSeekContentLength; ++j)
+			{
+				if (m_pBuff[i + j] != pSeekContent[j])
+				{
+					break;
+				}
+			}
+			if (j >= nSeekContentLength)
+			{
+				rIndex = i;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 } // namespace jaf

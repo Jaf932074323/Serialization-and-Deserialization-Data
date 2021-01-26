@@ -64,6 +64,13 @@ namespace jaf
 		// 跳过成功后，读取偏移增长读取的长度，失败不变
 		bool SkipRead(size_t nLength);
 
+		// 搜索子内存
+		// pSeekContent 被搜索内容的首地址
+		// nSeekcontentLength 被搜索内容的长度
+		// rIndex 返回被搜索到内容的相对于偏移处的索引
+		// 返回是否搜索到
+		bool SeekAtOffset(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex);
+
 	protected:
 		const char* m_pBuff = nullptr; // 要读取的内存地址
 		size_t m_nLength = 0; // 要读取的内存地址的长度

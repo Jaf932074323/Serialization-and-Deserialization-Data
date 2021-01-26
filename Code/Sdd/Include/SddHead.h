@@ -48,6 +48,7 @@
 #include "SddItem/SddDoubleItem.h"
 #include "SddItem/SddFloatItem.h"
 #include "SddItem/SddStringItem.h"
+#include "SddItem/SddVariLenStringItem.h"
 #include "SddItem/SddChunkItem.h"
 #include "SddItem/SddPlaceholderItem.h"
 // 序列化和反序列化单项中位相关

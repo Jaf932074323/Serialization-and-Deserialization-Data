@@ -22,51 +22,41 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020-12-16
-描述:内存读取器基类
-通过这个类能够比较方便的从内存中读取
+时间:2021/1/26
+描述:序列化和反序列化变长字符串项
 **************************************************************************/
-#include "TypeDefine.h"
+#include <string>
+#include <memory>
+#include "SddItemBase.h"
 
+// 创建变长字符串序列化反序列化数据项
+#define SDD_VARI_LEN_STRING(rVariate) jaf::CSddVariLenStringItem::Creation(rVariate)
 namespace jaf
 {
-	class CBuffReaderBase
+
+// 字符串的序列化和反序列化的数据项
+	class CSddVariLenStringItem :public CSddItemBase
 	{
 	public:
-		CBuffReaderBase() {};
-		virtual ~CBuffReaderBase() {};
+		CSddVariLenStringItem(std::string& str);
+		~CSddVariLenStringItem();
 
-		// 依附上一段要被读取的内存，并且读取偏移重置为0
-		// pBuff 内存地址
-		// nLength 内存长度 不能小于0
-		virtual void Attach(const char* pBuff, size_t nLength) = 0;
-		// 移除依附的内存
-		virtual void Clear() = 0;
+		// 创建字符串的序列化和反序列化的数据项
+		static std::shared_ptr<CSddInterface> Creation(std::string& value);
 
-		// 设置读取偏移
-		// nOffset 设置读取偏移 不能小于0，不能大于总长度，否则抛出异常
-		virtual void SetReadOffset(size_t nOffset) = 0;
-		// 获取读取偏移
-		virtual size_t GetReadOffset() = 0;
+		// 从缓冲区中读取数据
+		// rBuffer 缓冲区
+		// 成功返回true,失败返回false
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader);
+		// 将数据写入到缓冲区
+		// rBuffer 缓冲区
+		// 成功返回true,失败返回false
+		virtual void DataToBuffer(CBufferBase& rBuffer);
+		// 获取序列化或反序列化使用的字节长度
+		virtual size_t GetBufferLength();
 
-		// 从内存中读取数据
-		// pData 要读取数据到的对象的地址 不能为空
-		// nLength 要读取的长度
-		// return 成功返回true，失败返回false
-		// 读取成功后，读取偏移增长读取的长度，失败不变
-		virtual bool Read(char* pData, size_t nLength) = 0;
-		// 跳过多个要读取的字符
-		// nLength 要跳过的长度
-		// return 成功返回true，失败返回false
-		// 跳过成功后，读取偏移增长读取的长度，失败不变
-		virtual bool SkipRead(size_t nLength) = 0;
-
-		// 搜索子内存
-		// pSeekContent 被搜索内容的首地址
-		// nSeekcontentLength 被搜索内容的长度
-		// rIndex 返回被搜索到内容的相对于偏移处的索引
-		// 返回是否搜索到
-		virtual bool SeekAtOffset(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex) = 0;
+	protected:
+		std::string& m_str; // 字符串内容
 	};
 
 } // namespace jaf

@@ -99,6 +99,9 @@
     <ClCompile Include="Code\Buffer\BuffReader.cpp">
       <Filter>Code\Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="Code\SddItem\SddVariLenStringItem.cpp">
+      <Filter>Code\SddItem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\SddException.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="Include\TypeDefine.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\SddItem\SddVariLenStringItem.h">
+      <Filter>Code\SddItem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -185,6 +185,7 @@
     <ClCompile Include="Code\SddItem\SddFloatItem.cpp" />
     <ClCompile Include="Code\SddItem\SddPlaceholderItem.cpp" />
     <ClCompile Include="Code\SddItem\SddStringItem.cpp" />
+    <ClCompile Include="Code\SddItem\SddVariLenStringItem.cpp" />
     <ClCompile Include="Code\SddObject\SddBase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +219,7 @@
     <ClInclude Include="Include\SddItem\SddPlaceholderItem.h" />
     <ClInclude Include="Include\SddItem\SddStringItem.h" />
     <ClInclude Include="Include\SddItem\SddIntegerItem.h" />
+    <ClInclude Include="Include\SddItem\SddVariLenStringItem.h" />
     <ClInclude Include="Include\SddObject\SddBase.h" />
     <ClInclude Include="Include\SddObject\SddInterface.h" />
     <ClInclude Include="Include\TestPackAndUnpack.h" />

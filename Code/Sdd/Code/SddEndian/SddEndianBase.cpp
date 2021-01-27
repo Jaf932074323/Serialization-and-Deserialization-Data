@@ -25,8 +25,20 @@ namespace jaf
 {
 	E_ENDIAN CSddEndianBase::GetHostEndian()
 	{
-		static short s = 0x01;
-		return (E_ENDIAN) * (char*)&s;
+		union
+		{
+			short value;
+			char union_bytes[sizeof(short)];
+		} test;
+		test.value = 0x0102;
+		if ((test.union_bytes[0] == 0x01))
+		{
+			return E_ENDIAN::E_ENDIAN_BIG;
+		}
+		else 
+		{
+			return E_ENDIAN::E_ENDIAN_LITTLE;
+		}
 	}
 
 	void CSddEndianBase::EndianChange(char* pData, size_t nLeng)

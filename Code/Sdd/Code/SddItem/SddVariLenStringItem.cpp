@@ -69,7 +69,7 @@ namespace jaf
 		std::vector<char> vector;
 		size_t nLen = m_str.size() + 1;
 		vector.resize(nLen);
-		vector[nLen] = 0;
+		vector[nLen - 1] = 0;
 
 		memcpy_s(vector.data(), nLen, m_str.data(), nLen);
 		rBuffer.Write(vector.data(), nLen);

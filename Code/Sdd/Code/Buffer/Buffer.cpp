@@ -94,6 +94,7 @@ namespace jaf
 		ReleaseAllotMemory(); // 将原来分配的内存空间释放掉
 		m_pBuffer = pBuff; // 缓冲区指针指向新分配的内存空间
 		m_nCapacity = nTotalCapacity;
+		m_eStoreSite = E_STORE_SITE::E_STORE_SITE_DYNAMIC;
 
 		return;
 	}

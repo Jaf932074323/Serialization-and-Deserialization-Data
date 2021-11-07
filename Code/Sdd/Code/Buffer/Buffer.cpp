@@ -35,7 +35,6 @@ namespace jaf
 		memset(m_arrBufferStack, 0, g_nDefaultStackLen);
 	}
 
-
 	CBuffer::~CBuffer(void)
 	{
 		Clear();

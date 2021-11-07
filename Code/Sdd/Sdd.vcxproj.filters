@@ -84,12 +84,6 @@
     <ClCompile Include="Code\SddItem\SddBitItem\SddCharBit.cpp">
       <Filter>Code\SddItem\SddBitItem</Filter>
     </ClCompile>
-    <ClCompile Include="Code\ParsePackage\PackFactory.cpp">
-      <Filter>Code\ParsePackage</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.cpp">
-      <Filter>Code\ParsePackage\FixedHeadAndTailPack</Filter>
-    </ClCompile>
     <ClCompile Include="Code\Buffer\Buffer.cpp">
       <Filter>Code\Buffer</Filter>
     </ClCompile>

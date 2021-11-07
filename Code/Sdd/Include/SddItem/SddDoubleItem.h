@@ -35,7 +35,7 @@ namespace jaf
 {
 
 	// double的序列化和反序列化的数据项
-	class CSddDoubleItem :public CSddItemBase
+	class SDD_EXPORT CSddDoubleItem :public CSddItemBase
 	{
 	public:
 		CSddDoubleItem(double& rVariate);

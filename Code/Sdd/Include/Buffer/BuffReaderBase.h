@@ -26,11 +26,12 @@
 描述:内存读取器基类
 通过这个类能够比较方便的从内存中读取
 **************************************************************************/
+#include "ExportDefine.h"
 #include "TypeDefine.h"
 
 namespace jaf
 {
-	class CBuffReaderBase
+	class SDD_EXPORT CBuffReaderBase
 	{
 	public:
 		CBuffReaderBase() {};

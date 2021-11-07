@@ -29,7 +29,7 @@
 
 namespace jaf
 {
-	class CSddBoolBit :public CSddBitInterface
+	class SDD_EXPORT CSddBoolBit :public CSddBitInterface
 	{
 	public:
 		CSddBoolBit(bool& rBool, size_t nBitIndex);

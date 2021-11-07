@@ -25,22 +25,26 @@
 
 namespace jaf
 {
-	CSddBitItem::CSddBitItem(size_t nLength) : m_nLength(nLength), m_vectorBuff(m_nLength)
+	CSddBitItem::CSddBitItem(size_t nLength) : m_nLength(nLength)
 	{
+		m_pBuff = new char[nLength];
+		m_pBits = new std::list<std::shared_ptr<CSddBitInterface>>;
 	}
 
 	CSddBitItem::~CSddBitItem()
 	{
-
+		delete[] m_pBuff;
+		delete m_pBits;
 	}
 
 	bool CSddBitItem::BufferToData(CBuffReaderBase& rBuffReader)
 	{
-		rBuffReader.Read(m_vectorBuff.data(), m_nLength);
+		rBuffReader.Read(m_pBuff, m_nLength);
 
-		for (std::list<std::shared_ptr<CSddBitInterface>>::iterator it = m_listBit.begin(); it != m_listBit.end(); ++it)
+		std::list<std::shared_ptr<CSddBitInterface>>* pBits = (std::list<std::shared_ptr<CSddBitInterface>>*)m_pBits;
+		for (std::list<std::shared_ptr<CSddBitInterface>>::iterator it = pBits->begin(); it != pBits->end(); ++it)
 		{
-			if (!(*it)->BufferToData(m_vectorBuff.data(), m_nLength))
+			if (!(*it)->BufferToData(m_pBuff, m_nLength))
 			{
 				return false;
 			}
@@ -51,12 +55,13 @@ namespace jaf
 
 	void CSddBitItem::DataToBuffer(CBufferBase& rBuffer)
 	{
-		for (std::list<std::shared_ptr<CSddBitInterface>>::iterator it = m_listBit.begin(); it != m_listBit.end(); ++it)
+		std::list<std::shared_ptr<CSddBitInterface>>* pBits = (std::list<std::shared_ptr<CSddBitInterface>>*)m_pBits;
+		for (std::list<std::shared_ptr<CSddBitInterface>>::iterator it = pBits->begin(); it != pBits->end(); ++it)
 		{
-			(*it)->DataToBuffer(m_vectorBuff.data(), m_nLength);
+			(*it)->DataToBuffer(m_pBuff, m_nLength);
 		}
 
-		rBuffer.Write(m_vectorBuff.data(), m_nLength);
+		rBuffer.Write(m_pBuff, m_nLength);
 	}
 
 	// 获取序列化或反序列化使用的字节长度
@@ -67,7 +72,8 @@ namespace jaf
 
 	void CSddBitItem::AddChildBitItem(std::shared_ptr<CSddBitInterface> pChildBitItem)
 	{
-		m_listBit.push_back(pChildBitItem);
+		std::list<std::shared_ptr<CSddBitInterface>>* pBits = (std::list<std::shared_ptr<CSddBitInterface>>*)m_pBits;
+		pBits->push_back(pChildBitItem);
 	}
 
 } // namespace jaf

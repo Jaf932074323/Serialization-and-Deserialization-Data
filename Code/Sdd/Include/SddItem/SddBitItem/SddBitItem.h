@@ -34,7 +34,7 @@
 namespace jaf
 {
 	// 序列化和反序列化位的数据项
-	class CSddBitItem :public CSddItemBase
+	class SDD_EXPORT CSddBitItem :public CSddItemBase
 	{
 	public:
 		// 字符串的序列化和反序列化的位数据项
@@ -58,8 +58,9 @@ namespace jaf
 
 	protected:
 		size_t m_nLength; // 长度
-		std::vector<char> m_vectorBuff;  // 内部缓存，将各种位数据先缓存到这里，最后一起拷贝到输出缓存中
-		std::list<std::shared_ptr<CSddBitInterface>> m_listBit; // 子项列表
+		char* m_pBuff = nullptr;  // 内部缓存，将各种位数据先缓存到这里，最后一起拷贝到输出缓存中
+		//std::list<std::shared_ptr<CSddBitInterface>> m_listBit; // 子项列表
+		void* m_pBits = nullptr;  // 子项列表
 
 	};
 

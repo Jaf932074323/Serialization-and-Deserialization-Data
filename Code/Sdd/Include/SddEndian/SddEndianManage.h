@@ -31,7 +31,7 @@
 
 namespace jaf
 {
-	class CSddEndianManage
+	class SDD_EXPORT CSddEndianManage
 	{
 	public:
 		// ÉèÖÃÄ¬ÈÏ¶ËĞò

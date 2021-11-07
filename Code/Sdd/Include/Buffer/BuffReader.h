@@ -30,7 +30,7 @@
 
 namespace jaf
 {
-	class CBuffReader :public CBuffReaderBase
+	class SDD_EXPORT CBuffReader :public CBuffReaderBase
 	{
 	public:
 		CBuffReader();

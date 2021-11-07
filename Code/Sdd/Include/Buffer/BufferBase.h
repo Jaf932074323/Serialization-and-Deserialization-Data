@@ -25,10 +25,11 @@
 时间:2018-10-31 16:57
 描述:缓冲区基类
 **************************************************************************/
+#include "ExportDefine.h"
 
 namespace jaf
 {
-	class CBufferBase
+	class SDD_EXPORT CBufferBase
 	{
 	public:
 		CBufferBase(void) {};

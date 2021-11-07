@@ -21,6 +21,7 @@
 //SOFTWARE.
 #include "ParsePackage/PackFactory.h"
 #include <assert.h>
+#include <string>
 
 namespace jaf
 {

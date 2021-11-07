@@ -27,14 +27,13 @@
 这个类及其子类作用是方便的将特定的数据对象序列化成字节序列(缓冲区对象)，
 以及从字节序列(缓冲区对象)中反序列化出特定的数据对象
 **************************************************************************/
-#include <list>
-#include <string>
+#include "ExportDefine.h"
 #include "Buffer/BufferBase.h"
 #include "Buffer/BuffReaderBase.h"
 
 namespace jaf
 {
-	class CSddInterface
+	class SDD_EXPORT CSddInterface
 	{
 	public:
 		~CSddInterface(void) {};

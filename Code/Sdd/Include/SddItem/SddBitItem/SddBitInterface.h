@@ -25,10 +25,11 @@
 时间:2020/11/12
 描述:对位项的序列化和反序列化接口
 **************************************************************************/
+#include "ExportDefine.h"
 
 namespace jaf
 {
-	class CSddBitInterface
+	class SDD_EXPORT CSddBitInterface
 	{
 	public:
 		CSddBitInterface() {};

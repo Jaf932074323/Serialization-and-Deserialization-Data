@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -135,7 +135,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;_SDD_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -158,6 +158,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -184,8 +185,6 @@
     <ClCompile Include="Code\SddItem\SddDoubleItem.cpp" />
     <ClCompile Include="Code\SddItem\SddFloatItem.cpp" />
     <ClCompile Include="Code\SddItem\SddPlaceholderItem.cpp" />
-    <ClCompile Include="Code\SddItem\SddStringItem.cpp" />
-    <ClCompile Include="Code\SddItem\SddVariLenStringItem.cpp" />
     <ClCompile Include="Code\SddObject\SddBase.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +192,7 @@
     <ClInclude Include="Include\Buffer\BufferBase.h" />
     <ClInclude Include="Include\Buffer\BuffReader.h" />
     <ClInclude Include="Include\Buffer\BuffReaderBase.h" />
+    <ClInclude Include="Include\ExportDefine.h" />
     <ClInclude Include="Include\ParsePackage\DealPackInterface.h" />
     <ClInclude Include="Include\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.h" />
     <ClInclude Include="Include\ParsePackage\PackFactory.h" />

@@ -29,7 +29,7 @@
 
 namespace jaf
 {
-	class CSddEndianLittle : public CSddEndianBase
+	class SDD_EXPORT CSddEndianLittle : public CSddEndianBase
 	{
 		// 将数据写入到缓冲区
 		// rBuffer 缓冲区

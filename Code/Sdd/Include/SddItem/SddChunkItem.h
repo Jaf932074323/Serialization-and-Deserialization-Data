@@ -36,7 +36,7 @@ namespace jaf
 
 	// 块的序列化和反序列化的数据项
 	// 某个或多个数据集合到一起形成一块数据，对它序列化和反序列化
-	class CSddChunkItem :public CSddItemBase
+	class SDD_EXPORT CSddChunkItem :public CSddItemBase
 	{
 	public:
 		// 块的序列化和反序列化的数据项

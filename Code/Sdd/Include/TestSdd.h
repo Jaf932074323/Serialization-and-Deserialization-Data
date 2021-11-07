@@ -90,7 +90,7 @@ public:
 		item->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit1, 2, 7));
 		item->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit2, 9, 5));
 		item->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit3, 16, 8));
-		m_childItems.push_back(item);
+		SDD_ADD_ITEM(item);
 	}
 
 public:

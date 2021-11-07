@@ -35,7 +35,7 @@ namespace jaf
 {
 
 	// 字符串的序列化和反序列化的数据项
-	class CSddPlaceholderItem :public CSddItemBase
+	class SDD_EXPORT CSddPlaceholderItem :public CSddItemBase
 	{
 	public:
 		// nLength 占位长度

@@ -32,7 +32,7 @@
 
 namespace jaf
 {
-	class CSddItemBase :public CSddInterface
+	class SDD_EXPORT CSddItemBase :public CSddInterface
 	{
 	public:
 		CSddItemBase() : m_rEndian(CSddEndianManage::GetDefaultEndian())

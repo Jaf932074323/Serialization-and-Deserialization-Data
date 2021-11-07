@@ -35,7 +35,7 @@ namespace jaf
 {
 
 	// 字符串的序列化和反序列化的数据项
-	class CSddFloatItem :public CSddItemBase
+	class SDD_EXPORT CSddFloatItem :public CSddItemBase
 	{
 	public:
 		CSddFloatItem(float& rVariate);

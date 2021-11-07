@@ -36,11 +36,10 @@
 #include "SddEndian/SddEndianLittle.h"
 #include "SddEndian/SddEndianBig.h"
 
-#define SDD_ADD_ITEM(CreationItemFun) m_childItems.push_back(CreationItemFun);
+#define SDD_ADD_ITEM(CreationItemFun) AddChildItem(CreationItemFun);
 namespace jaf
 {
-
-	class CSddBase :public CSddInterface
+	class SDD_EXPORT CSddBase :public CSddInterface
 	{
 	public:
 		CSddBase();
@@ -59,9 +58,14 @@ namespace jaf
 		virtual size_t GetBufferLength();
 
 	protected:
+		// 添加子项
+		void AddChildItem(std::shared_ptr<CSddInterface> pChildItem);
+
+	protected:
 		CSddEndianBase& m_rEndian; // 端序
 
-		std::list<std::shared_ptr<CSddInterface>> m_childItems; // 子项列表
+		void* m_pItems = nullptr;
+		//std::list<std::shared_ptr<CSddInterface>> m_childItems; // 子项列表
 	};
 
 } // namespace jaf

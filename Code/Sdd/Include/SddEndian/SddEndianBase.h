@@ -27,6 +27,7 @@
 **************************************************************************/
 #include "Buffer/BufferBase.h"
 #include "Buffer/BuffReaderBase.h"
+#include "ExportDefine.h"
 
 namespace jaf
 {
@@ -38,7 +39,7 @@ namespace jaf
 		E_ENDIAN_LITTLE = 2, // 小端 Little-Endian
 	};
 
-	class CSddEndianBase
+	class SDD_EXPORT CSddEndianBase
 	{
 	public:
 		// 将数据写入到缓冲区

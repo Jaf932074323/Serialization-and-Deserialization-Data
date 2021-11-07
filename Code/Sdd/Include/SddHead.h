@@ -26,6 +26,7 @@
 描述:序列化和反序列化 头文件
 **************************************************************************/
 // 序列化和反序列化接口和基类相关
+#include "ExportDefine.h"
 #include "SddObject/SddInterface.h"
 #include "SddObject/SddBase.h"
 

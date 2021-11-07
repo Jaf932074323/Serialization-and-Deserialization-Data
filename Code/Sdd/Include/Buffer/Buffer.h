@@ -38,7 +38,7 @@ namespace jaf
 	const size_t g_nDefaultStackLen = 32; // 默认栈长度
 
 	// 缓冲区
-	class CBuffer :public CBufferBase
+	class SDD_EXPORT CBuffer :public CBufferBase
 	{
 	protected:
 		// 字节存储位置

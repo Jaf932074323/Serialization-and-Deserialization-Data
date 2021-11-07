@@ -29,7 +29,7 @@
 
 namespace jaf
 {
-	class CSddCharBit :public CSddBitInterface
+	class SDD_EXPORT CSddCharBit :public CSddBitInterface
 	{
 	public:
 		CSddCharBit(char& rChar, size_t nBitIndex, size_t nBitSize);

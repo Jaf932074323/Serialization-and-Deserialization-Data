@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
@@ -80,19 +80,19 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(ProjectDir)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(ProjectDir)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(ProjectDir)Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -186,43 +186,43 @@
     <ClCompile Include="Code\SddObject\SddBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Buffer\Buffer.h" />
-    <ClInclude Include="Include\Buffer\BufferBase.h" />
-    <ClInclude Include="Include\Buffer\BuffReader.h" />
-    <ClInclude Include="Include\Buffer\BuffReaderBase.h" />
-    <ClInclude Include="Include\ExportDefine.h" />
-    <ClInclude Include="Include\ParsePackage\DealPackInterface.h" />
-    <ClInclude Include="Include\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.h" />
-    <ClInclude Include="Include\ParsePackage\PackFactory.h" />
-    <ClInclude Include="Include\ParsePackage\PackBase.h" />
-    <ClInclude Include="Include\ParsePackage\ParsePackBase.h" />
-    <ClInclude Include="Include\ParsePackage\PackFactBase.h" />
-    <ClInclude Include="Include\ParsePackage\SpecialPack\PackHeadBase.h" />
-    <ClInclude Include="Include\ParsePackage\SpecialPack\PackTailBase.h" />
-    <ClInclude Include="Include\SddEndian\SddEndianBase.h" />
-    <ClInclude Include="Include\SddEndian\SddEndianBig.h" />
-    <ClInclude Include="Include\SddEndian\SddEndianLittle.h" />
-    <ClInclude Include="Include\SddEndian\SddEndianNo.h" />
-    <ClInclude Include="Include\SddEndian\SddEndianManage.h" />
-    <ClInclude Include="Include\SddException.h" />
-    <ClInclude Include="Include\SddHead.h" />
-    <ClInclude Include="Include\SddItem\SddBitItem\SddBitInterface.h" />
-    <ClInclude Include="Include\SddItem\SddBitItem\SddBitItem.h" />
-    <ClInclude Include="Include\SddItem\SddBitItem\SddBoolBit.h" />
-    <ClInclude Include="Include\SddItem\SddBitItem\SddCharBit.h" />
-    <ClInclude Include="Include\SddItem\SddChunkItem.h" />
-    <ClInclude Include="Include\SddItem\SddDoubleItem.h" />
-    <ClInclude Include="Include\SddItem\SddFloatItem.h" />
-    <ClInclude Include="Include\SddItem\SddItemBase.h" />
-    <ClInclude Include="Include\SddItem\SddPlaceholderItem.h" />
-    <ClInclude Include="Include\SddItem\SddStringItem.h" />
-    <ClInclude Include="Include\SddItem\SddIntegerItem.h" />
-    <ClInclude Include="Include\SddItem\SddVariLenStringItem.h" />
-    <ClInclude Include="Include\SddObject\SddBase.h" />
-    <ClInclude Include="Include\SddObject\SddInterface.h" />
-    <ClInclude Include="Include\TestPackAndUnpack.h" />
-    <ClInclude Include="Include\TestSdd.h" />
-    <ClInclude Include="Include\TypeDefine.h" />
+    <ClInclude Include="SddInclude\Buffer\Buffer.h" />
+    <ClInclude Include="SddInclude\Buffer\BufferBase.h" />
+    <ClInclude Include="SddInclude\Buffer\BuffReader.h" />
+    <ClInclude Include="SddInclude\Buffer\BuffReaderBase.h" />
+    <ClInclude Include="SddInclude\ExportDefine.h" />
+    <ClInclude Include="SddInclude\ParsePackage\DealPackInterface.h" />
+    <ClInclude Include="SddInclude\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.h" />
+    <ClInclude Include="SddInclude\ParsePackage\PackFactory.h" />
+    <ClInclude Include="SddInclude\ParsePackage\PackBase.h" />
+    <ClInclude Include="SddInclude\ParsePackage\ParsePackBase.h" />
+    <ClInclude Include="SddInclude\ParsePackage\PackFactBase.h" />
+    <ClInclude Include="SddInclude\ParsePackage\SpecialPack\PackHeadBase.h" />
+    <ClInclude Include="SddInclude\ParsePackage\SpecialPack\PackTailBase.h" />
+    <ClInclude Include="SddInclude\SddEndian\SddEndianBase.h" />
+    <ClInclude Include="SddInclude\SddEndian\SddEndianBig.h" />
+    <ClInclude Include="SddInclude\SddEndian\SddEndianLittle.h" />
+    <ClInclude Include="SddInclude\SddEndian\SddEndianNo.h" />
+    <ClInclude Include="SddInclude\SddEndian\SddEndianManage.h" />
+    <ClInclude Include="SddInclude\SddException.h" />
+    <ClInclude Include="SddInclude\SddHead.h" />
+    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddBitInterface.h" />
+    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddBitItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddBoolBit.h" />
+    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddCharBit.h" />
+    <ClInclude Include="SddInclude\SddItem\SddChunkItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddDoubleItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddFloatItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddItemBase.h" />
+    <ClInclude Include="SddInclude\SddItem\SddPlaceholderItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddStringItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddIntegerItem.h" />
+    <ClInclude Include="SddInclude\SddItem\SddVariLenStringItem.h" />
+    <ClInclude Include="SddInclude\SddObject\SddBase.h" />
+    <ClInclude Include="SddInclude\SddObject\SddInterface.h" />
+    <ClInclude Include="SddInclude\TestPackAndUnpack.h" />
+    <ClInclude Include="SddInclude\TestSdd.h" />
+    <ClInclude Include="SddInclude\TypeDefine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

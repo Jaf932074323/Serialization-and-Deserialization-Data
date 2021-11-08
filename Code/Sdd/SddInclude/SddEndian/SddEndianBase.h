@@ -22,33 +22,56 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2018/11/13 15:30
-描述:序列化和反序列化数据对象接口 Serialization and Deserialization Data 简称为SDD
-这个类及其子类作用是方便的将特定的数据对象序列化成字节序列(缓冲区对象)，
-以及从字节序列(缓冲区对象)中反序列化出特定的数据对象
+时间:2020-11-1
+描述:端序基类 头文件
 **************************************************************************/
-#include "ExportDefine.h"
-#include "Buffer/BufferBase.h"
-#include "Buffer/BuffReaderBase.h"
+#include "SddInclude/Buffer/BufferBase.h"
+#include "SddInclude/Buffer/BuffReaderBase.h"
+#include "SddInclude/ExportDefine.h"
 
 namespace jaf
 {
-	class SDD_EXPORT CSddInterface
+	// 字节序
+	enum class E_ENDIAN
+	{
+		E_ENDIAN_NULL = 0, // 不区分大小端 
+		E_ENDIAN_BIG = 1, // 大端 Big-Endian
+		E_ENDIAN_LITTLE = 2, // 小端 Little-Endian
+	};
+
+	class SDD_EXPORT CSddEndianBase
 	{
 	public:
-		~CSddInterface(void) {};
-		CSddInterface(void) {};
-
-		// 从缓冲区中读取数据
-		// rBuffer 缓冲区
-		// 成功返回true,失败返回false
-		virtual bool BufferToData(CBuffReaderBase& rBuffReader) = 0;
 		// 将数据写入到缓冲区
 		// rBuffer 缓冲区
+		// pData 数据地址
+		// nDataLeng 数据长度
+		// nNeedLeng 需要的长度
 		// 成功返回true,失败返回false
-		virtual void DataToBuffer(CBufferBase& rBuffer) = 0;
-		// 获取序列化或反序列化使用的字节序列长度
-		virtual size_t GetBufferLength() = 0;
+		virtual void DataToBuffer(CBufferBase& rBuffer, const char* pData, size_t nDataLen, size_t nNeedLen) = 0;
+		// 从缓冲区中读取数据
+		// rBuffer 缓冲区
+		// pData 数据地址
+		// nDataLeng 数据长度
+		// nNeedLeng 需要的长度
+		// 成功返回true,失败返回false
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader, char* pData, size_t nDataLen, size_t nNeedLen) = 0;
+
+		// 获取端序枚举值
+		virtual E_ENDIAN GetEndian() = 0;
+
+		// 获取主机字节序
+		// 大端：低位放在高地址，高位放在低地址
+		// 小端：低位放在低地址，高位放在高地址
+		static E_ENDIAN GetHostEndian();
+
+		// 字节序转换 返回t的反字节序(大端返回小端、小端返回大端)
+		// pData 要转换数据地址
+		// nLeng 要转换数据长度
+		static void EndianChange(char* pData, size_t nLeng);
+
+	protected:
+		static E_ENDIAN m_hostEndian; // 主机端序
 	};
 
 } // namespace jaf

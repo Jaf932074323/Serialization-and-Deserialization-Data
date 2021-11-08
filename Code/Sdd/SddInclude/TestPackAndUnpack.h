@@ -25,7 +25,7 @@
 时间:2020-12/20
 描述:组包与解包测试
 **************************************************************************/
-#include "SddHead.h"
+#include "SddInclude/SddHead.h"
 #include <string>
 
 const std::string g_strHead = "Head"; // 用"Head"4个字节表示包头

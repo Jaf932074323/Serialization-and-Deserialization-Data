@@ -22,56 +22,40 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020-11-1
-描述:端序基类 头文件
+时间:2020/10/24
+描述:序列化和反序列化一项
 **************************************************************************/
-#include "Buffer/BufferBase.h"
-#include "Buffer/BuffReaderBase.h"
-#include "ExportDefine.h"
+#include "SddInclude/TypeDefine.h"
+#include "SddInclude/SddObject/SddInterface.h"
+#include "SddInclude/SddEndian/SddEndianBase.h"
+#include "SddInclude/SddEndian/SddEndianManage.h"
 
 namespace jaf
 {
-	// 字节序
-	enum class E_ENDIAN
-	{
-		E_ENDIAN_NULL = 0, // 不区分大小端 
-		E_ENDIAN_BIG = 1, // 大端 Big-Endian
-		E_ENDIAN_LITTLE = 2, // 小端 Little-Endian
-	};
-
-	class SDD_EXPORT CSddEndianBase
+	class SDD_EXPORT CSddItemBase :public CSddInterface
 	{
 	public:
-		// 将数据写入到缓冲区
-		// rBuffer 缓冲区
-		// pData 数据地址
-		// nDataLeng 数据长度
-		// nNeedLeng 需要的长度
-		// 成功返回true,失败返回false
-		virtual void DataToBuffer(CBufferBase& rBuffer, const char* pData, size_t nDataLen, size_t nNeedLen) = 0;
+		CSddItemBase() : m_rEndian(CSddEndianManage::GetDefaultEndian())
+		{};
+		CSddItemBase(E_ENDIAN eEndian) :m_rEndian(CSddEndianManage::GetEndian(eEndian))
+		{};
+
+		virtual ~CSddItemBase(void) {};
+
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区
-		// pData 数据地址
-		// nDataLeng 数据长度
-		// nNeedLeng 需要的长度
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(CBuffReaderBase& rBuffReader, char* pData, size_t nDataLen, size_t nNeedLen) = 0;
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader) = 0;
+		// 将数据写入到缓冲区
+		// rBuffer 缓冲区
+		// 成功返回true,失败返回false
+		virtual void DataToBuffer(CBufferBase& rBuffer) = 0;
 
-		// 获取端序枚举值
-		virtual E_ENDIAN GetEndian() = 0;
-
-		// 获取主机字节序
-		// 大端：低位放在高地址，高位放在低地址
-		// 小端：低位放在低地址，高位放在高地址
-		static E_ENDIAN GetHostEndian();
-
-		// 字节序转换 返回t的反字节序(大端返回小端、小端返回大端)
-		// pData 要转换数据地址
-		// nLeng 要转换数据长度
-		static void EndianChange(char* pData, size_t nLeng);
+		// 获取序列化或反序列化使用的字节长度
+		virtual size_t GetBufferLength() = 0;
 
 	protected:
-		static E_ENDIAN m_hostEndian; // 主机端序
+		CSddEndianBase& m_rEndian; // 端序
 	};
 
 } // namespace jaf

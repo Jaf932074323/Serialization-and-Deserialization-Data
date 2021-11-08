@@ -22,31 +22,33 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020/11/12
-描述:对位项的序列化和反序列化接口
+时间:2018/11/13 15:30
+描述:序列化和反序列化数据对象接口 Serialization and Deserialization Data 简称为SDD
+这个类及其子类作用是方便的将特定的数据对象序列化成字节序列(缓冲区对象)，
+以及从字节序列(缓冲区对象)中反序列化出特定的数据对象
 **************************************************************************/
-#include "ExportDefine.h"
+#include "SddInclude/ExportDefine.h"
+#include "SddInclude/Buffer/BufferBase.h"
+#include "SddInclude/Buffer/BuffReaderBase.h"
 
 namespace jaf
 {
-	class SDD_EXPORT CSddBitInterface
+	class SDD_EXPORT CSddInterface
 	{
 	public:
-		CSddBitInterface() {};
-		virtual ~CSddBitInterface() {};
+		~CSddInterface(void) {};
+		CSddInterface(void) {};
 
-	public:
-		// 从缓冲区中读取位数据
-		// pBuff 缓冲区
-		// nLength 缓冲区总长度
+		// 从缓冲区中读取数据
+		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(const char* pBuff, size_t nLength) = 0;
-		// 将位数据写入到缓冲区
-		// pBuff 缓冲区
-		// nLength 缓冲区总长度
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader) = 0;
+		// 将数据写入到缓冲区
+		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool DataToBuffer(char* pBuff, size_t nLength) = 0;
-
+		virtual void DataToBuffer(CBufferBase& rBuffer) = 0;
+		// 获取序列化或反序列化使用的字节序列长度
+		virtual size_t GetBufferLength() = 0;
 	};
 
 } // namespace jaf

@@ -28,7 +28,7 @@
 #include <map>
 #include <string>
 #include <assert.h>
-#include "PackFactBase.h"
+#include "SddInclude/ParsePackage/PackFactBase.h"
 
 namespace jaf
 {

@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Sdd\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
     <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
@@ -81,21 +81,21 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)Sdd\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)Sdd\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)Sdd\Include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

@@ -22,31 +22,33 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020-11-8
-描述:端序管理
+时间:2020/11/12
+描述:对布尔位项的序列化和反序列化
 **************************************************************************/
-#include "SddEndian/SddEndianNo.h"
-#include "SddEndian/SddEndianBig.h"
-#include "SddEndian/SddEndianLittle.h"
+#include "SddInclude/SddItem/SddBitItem/SddBitInterface.h"
 
 namespace jaf
 {
-	class SDD_EXPORT CSddEndianManage
+	class SDD_EXPORT CSddBoolBit :public CSddBitInterface
 	{
 	public:
-		// 设置默认端序
-		static void SetDefaultEndian(E_ENDIAN eDefaultEndian);
-		// 获取默认端序
-		static CSddEndianBase& GetDefaultEndian();
+		CSddBoolBit(bool& rBool, size_t nBitIndex);
+		~CSddBoolBit();
 
-		// 获取端序对象实例
-		static CSddEndianBase& GetEndian(E_ENDIAN eEndian);
-	private:
-		// 端序
-		static CSddEndianNo m_endianNo;
-		static CSddEndianBig m_endianBig;
-		static CSddEndianLittle m_endianLittle;
-		static CSddEndianBase* m_pDefaultEdndian; // 默认端序
+		// 从缓冲区中读取位数据
+		// pBuff 缓冲区
+		// nLength 缓冲区总长度
+		// 成功返回true,失败返回false
+		virtual bool BufferToData(const char* pBuff, size_t nLength);
+		// 将位数据写入到缓冲区
+		// pBuff 缓冲区
+		// nLength 缓冲区总长度
+		// 成功返回true,失败返回false
+		virtual bool DataToBuffer(char* pBuff, size_t nLength);
+
+	protected:
+		bool& m_rBool; // 要序列化的布尔值的引用
+		size_t m_nBitIndex; // 序列化到的位索引
 	};
 
 } // namespace jaf

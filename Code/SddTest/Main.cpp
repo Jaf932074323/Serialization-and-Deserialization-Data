@@ -21,8 +21,8 @@
 //SOFTWARE.
 #include <iostream>
 #include <list>
-#include "TestSdd.h"
-#include "TestPackAndUnpack.h"
+#include "SddInclude/TestSdd.h"
+#include "SddInclude/TestPackAndUnpack.h"
 
 int main()
 {

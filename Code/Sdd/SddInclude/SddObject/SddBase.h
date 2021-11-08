@@ -22,43 +22,50 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020/11/12
-描述:对布尔位项的序列化和反序列化
+时间:2018/10/25
+描述:序列化和反序列化数据对象 Serialization and Deserialization Data 简称为SDD
+这个类及其子类作用是方便的将特定的数据集序列化成字节序列(缓冲区对象)，
+以及从字节数组(缓冲区对象)中反序列化出特定的数据对象
 **************************************************************************/
-#include "SddItem/SddBitItem/SddBitInterface.h"
+#include <list>
+#include <memory>
+#include "SddInclude/SddObject/SddInterface.h"
+#include "SddInclude/SddEndian/SddEndianBase.h"
+#include "SddInclude/SddEndian/SddEndianBase.h"
+#include "SddInclude/SddEndian/SddEndianNo.h"
+#include "SddInclude/SddEndian/SddEndianLittle.h"
+#include "SddInclude/SddEndian/SddEndianBig.h"
 
+#define SDD_ADD_ITEM(CreationItemFun) AddChildItem(CreationItemFun);
 namespace jaf
 {
-	class SDD_EXPORT CSddCharBit :public CSddBitInterface
+	class SDD_EXPORT CSddBase :public CSddInterface
 	{
 	public:
-		CSddCharBit(char& rChar, size_t nBitIndex, size_t nBitSize);
-		~CSddCharBit();
+		CSddBase();
+		CSddBase(E_ENDIAN eEndian);
+		~CSddBase(void);
 
-		// 从缓冲区中读取位数据
-		// pBuff 缓冲区
-		// nLength 缓冲区总长度
+		// 从缓冲区中读取数据
+		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(const char* pBuff, size_t nLength);
-		// 将位数据写入到缓冲区
-		// pBuff 缓冲区
-		// nLength 缓冲区总长度
+		virtual bool BufferToData(CBuffReaderBase& rBuffer);
+		// 将数据写入到缓冲区
+		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool DataToBuffer(char* pBuff, size_t nLength);
+		virtual void DataToBuffer(CBufferBase& rBuffer);
+		// 获取序列化或反序列化使用的字节序列长度
+		virtual size_t GetBufferLength();
 
 	protected:
-		// 拷贝一个字节中连续几位到另一个字节中
-		// pDst 要拷贝到的目标字节地址
-		// nDstIndex 目标字节的开始位置
-		// pSrc 被拷贝的源字节地址
-		// nSrcIndex 源字节的开始位置
-		// nBitSize 拷贝的位数
-		// 源字节和目标字节都不能超过一个字节的范围
-		void BitCopy(char* pDst, size_t nDstIndex, const char* pSrc, size_t nSrcIndex, size_t nBitSize);
+		// 添加子项
+		void AddChildItem(std::shared_ptr<CSddInterface> pChildItem);
+
 	protected:
-		char& m_rChar; // 要序列化的布尔值的引用
-		size_t m_nBitIndex; // 序列化到的位的开始索引
-		size_t m_nBitSize; // 要序列化的位数量 
+		CSddEndianBase& m_rEndian; // 端序
+
+		void* m_pItems = nullptr;
+		//std::list<std::shared_ptr<CSddInterface>> m_childItems; // 子项列表
 	};
 
 } // namespace jaf

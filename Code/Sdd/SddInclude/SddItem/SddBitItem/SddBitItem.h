@@ -22,51 +22,46 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2018/10/25
-描述:序列化和反序列化数据对象 Serialization and Deserialization Data 简称为SDD
-这个类及其子类作用是方便的将特定的数据集序列化成字节序列(缓冲区对象)，
-以及从字节数组(缓冲区对象)中反序列化出特定的数据对象
+时间:2020/11/5
+描述:序列化和反序列化 一块数据作为一项
 **************************************************************************/
+#include <vector>
 #include <list>
 #include <memory>
-#include "SddObject/SddInterface.h"
-#include "SddEndian/SddEndianBase.h"
-#include "SddEndian/SddEndianBase.h"
-#include "SddEndian/SddEndianNo.h"
-#include "SddEndian/SddEndianLittle.h"
-#include "SddEndian/SddEndianBig.h"
+#include "SddInclude/SddItem/SddItemBase.h"
+#include "SddInclude/SddItem/SddBitItem/SddBitInterface.h"
 
-#define SDD_ADD_ITEM(CreationItemFun) AddChildItem(CreationItemFun);
 namespace jaf
 {
-	class SDD_EXPORT CSddBase :public CSddInterface
+	// 序列化和反序列化位的数据项
+	class SDD_EXPORT CSddBitItem :public CSddItemBase
 	{
 	public:
-		CSddBase();
-		CSddBase(E_ENDIAN eEndian);
-		~CSddBase(void);
+		// 字符串的序列化和反序列化的位数据项
+		// nLength 字节长度
+		CSddBitItem(size_t nLength);
+		~CSddBitItem();
 
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(CBuffReaderBase& rBuffer);
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader);
 		// 将数据写入到缓冲区
 		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
 		virtual void DataToBuffer(CBufferBase& rBuffer);
-		// 获取序列化或反序列化使用的字节序列长度
+		// 获取序列化或反序列化使用的字节长度
 		virtual size_t GetBufferLength();
 
-	protected:
-		// 添加子项
-		void AddChildItem(std::shared_ptr<CSddInterface> pChildItem);
+		// 添加一个子项
+		virtual void AddChildBitItem(std::shared_ptr<CSddBitInterface> pChildBitItem);
 
 	protected:
-		CSddEndianBase& m_rEndian; // 端序
+		size_t m_nLength; // 长度
+		char* m_pBuff = nullptr;  // 内部缓存，将各种位数据先缓存到这里，最后一起拷贝到输出缓存中
+		//std::list<std::shared_ptr<CSddBitInterface>> m_listBit; // 子项列表
+		void* m_pBits = nullptr;  // 子项列表
 
-		void* m_pItems = nullptr;
-		//std::list<std::shared_ptr<CSddInterface>> m_childItems; // 子项列表
 	};
 
 } // namespace jaf
-

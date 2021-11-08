@@ -22,52 +22,44 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020-12-16
-描述:内存读取器基类
-通过这个类能够比较方便的从内存中读取
+时间:2020/11/12
+描述:对布尔位项的序列化和反序列化
 **************************************************************************/
-#include "ExportDefine.h"
-#include "TypeDefine.h"
+#include "SddInclude/SddItem/SddBitItem/SddBitInterface.h"
 
 namespace jaf
 {
-	class SDD_EXPORT CBuffReaderBase
+	class SDD_EXPORT CSddCharBit :public CSddBitInterface
 	{
 	public:
-		CBuffReaderBase() {};
-		virtual ~CBuffReaderBase() {};
+		CSddCharBit(char& rChar, size_t nBitIndex, size_t nBitSize);
+		~CSddCharBit();
 
-		// 依附上一段要被读取的内存，并且读取偏移重置为0
-		// pBuff 内存地址
-		// nLength 内存长度 不能小于0
-		virtual void Attach(const char* pBuff, size_t nLength) = 0;
-		// 移除依附的内存
-		virtual void Clear() = 0;
+		// 从缓冲区中读取位数据
+		// pBuff 缓冲区
+		// nLength 缓冲区总长度
+		// 成功返回true,失败返回false
+		virtual bool BufferToData(const char* pBuff, size_t nLength);
+		// 将位数据写入到缓冲区
+		// pBuff 缓冲区
+		// nLength 缓冲区总长度
+		// 成功返回true,失败返回false
+		virtual bool DataToBuffer(char* pBuff, size_t nLength);
 
-		// 设置读取偏移
-		// nOffset 设置读取偏移 不能小于0，不能大于总长度，否则抛出异常
-		virtual void SetReadOffset(size_t nOffset) = 0;
-		// 获取读取偏移
-		virtual size_t GetReadOffset() = 0;
-
-		// 从内存中读取数据
-		// pData 要读取数据到的对象的地址 不能为空
-		// nLength 要读取的长度
-		// return 成功返回true，失败返回false
-		// 读取成功后，读取偏移增长读取的长度，失败不变
-		virtual bool Read(char* pData, size_t nLength) = 0;
-		// 跳过多个要读取的字符
-		// nLength 要跳过的长度
-		// return 成功返回true，失败返回false
-		// 跳过成功后，读取偏移增长读取的长度，失败不变
-		virtual bool SkipRead(size_t nLength) = 0;
-
-		// 搜索子内存
-		// pSeekContent 被搜索内容的首地址
-		// nSeekcontentLength 被搜索内容的长度
-		// rIndex 返回被搜索到内容的相对于偏移处的索引
-		// 返回是否搜索到
-		virtual bool SeekAtOffset(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex) = 0;
+	protected:
+		// 拷贝一个字节中连续几位到另一个字节中
+		// pDst 要拷贝到的目标字节地址
+		// nDstIndex 目标字节的开始位置
+		// pSrc 被拷贝的源字节地址
+		// nSrcIndex 源字节的开始位置
+		// nBitSize 拷贝的位数
+		// 源字节和目标字节都不能超过一个字节的范围
+		void BitCopy(char* pDst, size_t nDstIndex, const char* pSrc, size_t nSrcIndex, size_t nBitSize);
+	protected:
+		char& m_rChar; // 要序列化的布尔值的引用
+		size_t m_nBitIndex; // 序列化到的位的开始索引
+		size_t m_nBitSize; // 要序列化的位数量 
 	};
 
 } // namespace jaf
+

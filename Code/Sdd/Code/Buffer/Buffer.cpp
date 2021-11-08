@@ -20,9 +20,9 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-#include "Buffer/Buffer.h"
+#include "SddInclude/Buffer/Buffer.h"
 #include <assert.h>
-#include "SddException.h"
+#include "SddInclude/SddException.h"
 
 namespace jaf
 {

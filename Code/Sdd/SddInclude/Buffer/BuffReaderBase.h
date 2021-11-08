@@ -22,67 +22,52 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2018-10-31 16:57
-描述:缓冲区基类
+时间:2020-12-16
+描述:内存读取器基类
+通过这个类能够比较方便的从内存中读取
 **************************************************************************/
-#include "ExportDefine.h"
+#include "SddInclude/ExportDefine.h"
+#include "SddInclude/TypeDefine.h"
 
 namespace jaf
 {
-	class SDD_EXPORT CBufferBase
+	class SDD_EXPORT CBuffReaderBase
 	{
 	public:
-		CBufferBase(void) {};
-		~CBufferBase(void) {};
+		CBuffReaderBase() {};
+		virtual ~CBuffReaderBase() {};
 
-		// 清空 释放内存、清空已读字节等
+		// 依附上一段要被读取的内存，并且读取偏移重置为0
+		// pBuff 内存地址
+		// nLength 内存长度 不能小于0
+		virtual void Attach(const char* pBuff, size_t nLength) = 0;
+		// 移除依附的内存
 		virtual void Clear() = 0;
 
-		// 预约nSize空间,用于写入字节 让缓存区能够再写入nSize个字节
-		// 在总容量不够时，重新分配更大的内存空间，以能够存取nSize个字节
-		// 当使用存储在用户提供的内存时，若总容量不够，返回false
-		// nSize 要预约空间的大小
-		virtual void Reserve(size_t nSize) = 0;
+		// 设置读取偏移
+		// nOffset 设置读取偏移 不能小于0，不能大于总长度，否则抛出异常
+		virtual void SetReadOffset(size_t nOffset) = 0;
+		// 获取读取偏移
+		virtual size_t GetReadOffset() = 0;
 
-		// 扩展缓冲区空间
-		// 扩展容量到总容量至少有nCapacity个字节大小，在总容量不够时，重新分配更大的内存空间，以能够再存取nSize个字节
-		// 当使用存储在用户提供的内存时，若总容量不够，返回false
-		// nCapacity 要扩展的目标大小大小
-		virtual void ExtendCapacity(size_t nCapacity) = 0;
-
-		// 获取已写入字节数量
-		virtual size_t GetWriteLength() const = 0;
-
-		// 获取缓冲区地址
-		virtual const char* GetBuffer() const = 0;
-
-	public:
-		// 写入数据到缓冲区中
-		// pData 要写入对象的地址 不能为空
-		// nLength 要写入的长度
-		virtual void Write(const char* pData, size_t nLength) = 0;
-
-		// 重复写入同一个字符到缓冲区中
-		// c 要写入的字符
-		// nLength 要写入字符的个数
+		// 从内存中读取数据
+		// pData 要读取数据到的对象的地址 不能为空
+		// nLength 要读取的长度
 		// return 成功返回true，失败返回false
-		virtual void WriteChar(char c, size_t nLength) = 0;
-
-	public:
-		// 删除前指定长度
-		// nLength 要删除的长度,如果长度不够则全部删除
-		virtual void PopFront(size_t nLength) = 0;
-		// 删除后指定长度
-		// nLength 要删除的长度,如果长度不够则全部删除
-		virtual void PopBack(size_t nLength) = 0;
+		// 读取成功后，读取偏移增长读取的长度，失败不变
+		virtual bool Read(char* pData, size_t nLength) = 0;
+		// 跳过多个要读取的字符
+		// nLength 要跳过的长度
+		// return 成功返回true，失败返回false
+		// 跳过成功后，读取偏移增长读取的长度，失败不变
+		virtual bool SkipRead(size_t nLength) = 0;
 
 		// 搜索子内存
 		// pSeekContent 被搜索内容的首地址
 		// nSeekcontentLength 被搜索内容的长度
-		// rIndex 返回被搜索到内容的索引
+		// rIndex 返回被搜索到内容的相对于偏移处的索引
 		// 返回是否搜索到
-		virtual bool SeekFront(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex) = 0;
+		virtual bool SeekAtOffset(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex) = 0;
 	};
 
 } // namespace jaf
-

@@ -22,41 +22,86 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020/10/24
-描述:序列化和反序列化一项
+时间:2021/1/26
+描述:变长字符串的序列化和反序列化对象
 **************************************************************************/
-#include "SddInclude/TypeDefine.h"
-#include "SddInclude/SddObject/SddInterface.h"
-#include "SddInclude/SddEndian/SddEndianBase.h"
-#include "SddInclude/SddEndian/SddEndianManage.h"
+#include <string>
+#include <vector>
+#include <memory>
+#include "SddInclude/Sdd/SddInterface.h"
+#include "SddInclude/SddException.h"
 
+// 创建变长字符串的序列化和反序列化对象
+#define SDD_VARI_LEN_STRING(rVariate) jaf::CSddVariLenString::Creation(rVariate)
 namespace jaf
 {
-	class SDD_EXPORT CSddItemBase :public CSddInterface
+
+	// 变长字符串的序列化和反序列化对象
+	class CSddVariLenString :public CSddInterface
 	{
 	public:
-		CSddItemBase() : m_rEndian(CSddEndianManage::GetDefaultEndian())
-		{};
-		CSddItemBase(E_ENDIAN eEndian) :m_rEndian(CSddEndianManage::GetEndian(eEndian))
-		{};
+		CSddVariLenString(std::string& str) :m_str(str)
+		{
+		}
+		~CSddVariLenString() {}
 
-		virtual ~CSddItemBase(void) {};
+		// 创建变长字符串的序列化和反序列化对象
+		static std::shared_ptr<CSddInterface> Creation(std::string& value)
+		{
+			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddVariLenString>(value);
+			if (pItem == nullptr)
+			{
+				throw CSddException("创建字符串数据项失败", __FILE__, __LINE__);
+			}
+			return pItem;
+		}
 
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(CBuffReaderBase& rBuffReader) = 0;
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader)
+		{
+			// 查找字符串长度
+			size_t nPos = 0;
+			if (!rBuffReader.SeekAtOffset("\0", 1, nPos))
+			{
+				return false;
+			}
+
+			std::vector<char> vector;
+			vector.resize(nPos);
+			vector[nPos] = 0;
+
+			if (!rBuffReader.Read(vector.data(), nPos))
+			{
+				return false;
+			}
+			m_str = vector.data();
+			return true;
+		}
+
 		// 将数据写入到缓冲区
 		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual void DataToBuffer(CBufferBase& rBuffer) = 0;
+		virtual void DataToBuffer(CBufferBase& rBuffer)
+		{
+			std::vector<char> vector;
+			size_t nLen = m_str.size() + 1;
+			vector.resize(nLen);
+			vector[nLen - 1] = 0;
+
+			memcpy_s(vector.data(), nLen, m_str.data(), nLen);
+			rBuffer.Write(vector.data(), nLen);
+		}
 
 		// 获取序列化或反序列化使用的字节长度
-		virtual size_t GetBufferLength() = 0;
+		virtual size_t GetBufferLength()
+		{
+			return m_str.size() + 1;
+		}
 
 	protected:
-		CSddEndianBase& m_rEndian; // 端序
+		std::string& m_str; // 字符串内容
 	};
 
 } // namespace jaf
-

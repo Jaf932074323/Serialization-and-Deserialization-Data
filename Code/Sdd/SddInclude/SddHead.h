@@ -27,8 +27,8 @@
 **************************************************************************/
 // 序列化和反序列化接口和基类相关
 #include "ExportDefine.h"
-#include "SddObject/SddInterface.h"
-#include "SddObject/SddBase.h"
+#include "Sdd/SddInterface.h"
+#include "SddInclude/Sdd/SddBase.h"
 
 // 缓存和缓存读取器相关
 #include "Buffer/BufferBase.h"
@@ -44,19 +44,19 @@
 #include "SddEndian/SddEndianManage.h"
 
 // 序列化和反序列化单项相关
-#include "SddItem/SddItemBase.h"
-#include "SddItem/SddIntegerItem.h"
-#include "SddItem/SddDoubleItem.h"
-#include "SddItem/SddFloatItem.h"
-#include "SddItem/SddStringItem.h"
-#include "SddItem/SddVariLenStringItem.h"
-#include "SddItem/SddChunkItem.h"
-#include "SddItem/SddPlaceholderItem.h"
+#include "SddInclude/Sdd/SddBase.h"
+#include "Sdd/SddObject/SddInteger.h"
+#include "Sdd/SddObject/SddDouble.h"
+#include "Sdd/SddObject/SddFloat.h"
+#include "Sdd/SddObject/SddString.h"
+#include "Sdd/SddObject/SddVariLenString.h"
+#include "Sdd/SddObject/SddChunk.h"
+#include "Sdd/SddObject/SddPlaceholder.h"
 // 序列化和反序列化单项中位相关
-#include "SddItem/SddBitItem/SddBitInterface.h"
-#include "SddItem/SddBitItem/SddBitItem.h"
-#include "SddItem/SddBitItem/SddBoolBit.h"
-#include "SddItem/SddBitItem/SddCharBit.h"
+#include "Sdd/SddObject/SddBitObject/SddBitInterface.h"
+#include "Sdd/SddObject/SddBitObject/SddBitItem.h"
+#include "Sdd/SddObject/SddBitObject/SddBoolBit.h"
+#include "Sdd/SddObject/SddBitObject/SddCharBit.h"
 
 // 组包与解包相关
 #include "ParsePackage/PackBase.h"

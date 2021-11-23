@@ -25,7 +25,7 @@
 时间:2020-12-13
 描述:包头基类
 **************************************************************************/
-#include "SddObject/SddBase.h"
+#include "SddInclude/Sdd/SddBase.h"
 
 namespace jaf
 {

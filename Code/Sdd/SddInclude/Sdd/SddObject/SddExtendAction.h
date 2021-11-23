@@ -22,51 +22,65 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2018/10/25
-描述:序列化和反序列化数据对象 Serialization and Deserialization Data 简称为SDD
-这个类及其子类作用是方便的将特定的数据集序列化成字节序列(缓冲区对象)，
-以及从字节数组(缓冲区对象)中反序列化出特定的数据对象
+时间:2020/11/22
+描述:序列化和反序列化 用户扩展行为
 **************************************************************************/
-#include <list>
+#include <functional>
 #include <memory>
-#include "SddInclude/SddObject/SddInterface.h"
-#include "SddInclude/SddEndian/SddEndianBase.h"
-#include "SddInclude/SddEndian/SddEndianBase.h"
-#include "SddInclude/SddEndian/SddEndianNo.h"
-#include "SddInclude/SddEndian/SddEndianLittle.h"
-#include "SddInclude/SddEndian/SddEndianBig.h"
+#include <string>
+#include "SddInclude/Sdd/SddInterface.h"
+#include "SddInclude/SddException.h"
 
-#define SDD_ADD_ITEM(CreationItemFun) AddChildItem(CreationItemFun);
 namespace jaf
 {
-	class SDD_EXPORT CSddBase :public CSddInterface
+	class CSddExtendAction:public CSddInterface
 	{
 	public:
-		CSddBase();
-		CSddBase(E_ENDIAN eEndian);
-		~CSddBase(void);
+		CSddExtendAction(const std::function<bool(CBuffReaderBase&)>& funBufferToData
+			, const std::function<void(CBufferBase&)>& funDataToBuffer)
+			:m_funBufferToData(funBufferToData), m_funDataToBuffer(funDataToBuffer)
+		{
+		}
+
+		~CSddExtendAction()
+		{
+		}
+
+		// 创建字符串的序列化和反序列化的数据项
+		static std::shared_ptr<CSddInterface> Creation(const std::function<void(CBuffReaderBase&)>& funBufferToData
+			, const std::function<void(CBufferBase&)>& funDataToBuffer)
+		{
+			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddExtendAction>(funBufferToData, funDataToBuffer);
+			if (pItem == nullptr)
+			{
+				throw CSddException("创建用户扩展行为对象失败", __FILE__, __LINE__);
+			}
+			return pItem;
+		}
 
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(CBuffReaderBase& rBuffer);
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader)
+		{
+			return m_funBufferToData(rBuffReader);
+		}
 		// 将数据写入到缓冲区
 		// rBuffer 缓冲区
-		// 成功返回true,失败返回false
-		virtual void DataToBuffer(CBufferBase& rBuffer);
-		// 获取序列化或反序列化使用的字节序列长度
-		virtual size_t GetBufferLength();
+		virtual void DataToBuffer(CBufferBase& rBuffer)
+		{
+			m_funDataToBuffer(rBuffer);
+		}
+
+		// 获取序列化或反序列化使用的字节长度
+		virtual size_t GetBufferLength()
+		{
+			return 0;
+		}
 
 	protected:
-		// 添加子项
-		void AddChildItem(std::shared_ptr<CSddInterface> pChildItem);
-
-	protected:
-		CSddEndianBase& m_rEndian; // 端序
-
-		void* m_pItems = nullptr;
-		//std::list<std::shared_ptr<CSddInterface>> m_childItems; // 子项列表
+		std::function<bool(CBuffReaderBase& rBuffReader)> m_funBufferToData;
+		std::function<void(CBufferBase& rBuffer)> m_funDataToBuffer;
 	};
 
-} // namespace jaf
-
+}

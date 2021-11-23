@@ -23,21 +23,21 @@
 /**************************************************************************
 作者:姜安富
 时间:2020/11/5
-描述:序列化和反序列化 一块数据作为一项
+描述: 对位序列化和反序列化对象
 **************************************************************************/
 #include <vector>
 #include <list>
 #include <memory>
-#include "SddInclude/SddItem/SddItemBase.h"
-#include "SddInclude/SddItem/SddBitItem/SddBitInterface.h"
+#include "SddInclude/Sdd/SddInterface.h"
+#include "SddInclude/Sdd/SddObject/SddBitObject/SddBitInterface.h"
 
 namespace jaf
 {
-	// 序列化和反序列化位的数据项
-	class SDD_EXPORT CSddBitItem :public CSddItemBase
+	// 对位序列化和反序列化对象
+	class SDD_EXPORT CSddBitItem :public CSddInterface
 	{
 	public:
-		// 字符串的序列化和反序列化的位数据项
+		// 对位序列化和反序列化对象
 		// nLength 字节长度
 		CSddBitItem(size_t nLength);
 		~CSddBitItem();
@@ -59,7 +59,6 @@ namespace jaf
 	protected:
 		size_t m_nLength; // 长度
 		char* m_pBuff = nullptr;  // 内部缓存，将各种位数据先缓存到这里，最后一起拷贝到输出缓存中
-		//std::list<std::shared_ptr<CSddBitInterface>> m_listBit; // 子项列表
 		void* m_pBits = nullptr;  // 子项列表
 
 	};

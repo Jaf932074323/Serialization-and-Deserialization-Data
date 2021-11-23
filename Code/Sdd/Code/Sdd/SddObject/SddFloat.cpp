@@ -19,52 +19,42 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-#include "SddInclude/SddItem/SddChunkItem.h"
+#include "SddInclude/Sdd/SddObject/SddFloat.h"
 #include "SddInclude/SddException.h"
 
 namespace jaf
 {
-	CSddChunkItem::CSddChunkItem(void* pVariate, size_t nLength) :m_pChunk(pVariate), m_nLength(nLength)
+	CSddFloat::CSddFloat(float& rVariate) :m_f(rVariate)
 	{
-		if (pVariate == nullptr)
-		{
-			throw CSddException("序列化传入块对象地址为空", __FILE__, __LINE__);
-		}
-		if (m_nLength < 0)
-		{
-			throw CSddException("序列化长度传入值为负", __FILE__, __LINE__);
-		}
 	}
 
-	CSddChunkItem::~CSddChunkItem()
+	CSddFloat::~CSddFloat()
 	{
-
 	}
 
-	std::shared_ptr<CSddInterface> CSddChunkItem::Creation(void* pVariate, size_t nLength)
+	std::shared_ptr<CSddInterface> CSddFloat::Creation(float& rVariate)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddChunkItem>(pVariate, nLength);
+		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddFloat>(rVariate);
 		if (pItem == nullptr)
 		{
-			throw CSddException("创建块数据项失败", __FILE__, __LINE__);
+			throw CSddException("创建float数据项失败", __FILE__, __LINE__);
 		}
 		return pItem;
 	}
 
-	bool CSddChunkItem::BufferToData(CBuffReaderBase& rBuffReader)
+	bool CSddFloat::BufferToData(CBuffReaderBase& rBuffReader)
 	{
-		return rBuffReader.Read((char*)m_pChunk, m_nLength);
+		return rBuffReader.Read((char*)&m_f, sizeof(float));
 	}
 
-	void CSddChunkItem::DataToBuffer(CBufferBase& rBuffer)
+	void CSddFloat::DataToBuffer(CBufferBase& rBuffer)
 	{
-		rBuffer.Write((char*)m_pChunk, m_nLength);
+		rBuffer.Write((char*)&m_f, sizeof(float));
 	}
 
-	// 获取序列化或反序列化使用的字节长度
-	size_t CSddChunkItem::GetBufferLength()
+	size_t CSddFloat::GetBufferLength()
 	{
-		return m_nLength;
+		return sizeof(float);
 	}
 
 } // namespace jaf

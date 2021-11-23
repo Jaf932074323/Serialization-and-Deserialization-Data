@@ -19,56 +19,50 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-#include "SddItem/SddStringItem.h"
-#include <vector>
-#include "SddException.h"
+#include "SddInclude/Sdd/SddObject/SddChunk.h"
+#include "SddInclude/SddException.h"
 
 namespace jaf
 {
-	CSddStringItem::CSddStringItem(std::string& str, size_t nLength) :m_str(str), m_nLength(nLength)
+	CSddChunk::CSddChunk(void* pVariate, size_t nLength) :m_pChunk(pVariate), m_nLength(nLength)
 	{
+		if (pVariate == nullptr)
+		{
+			throw CSddException("序列化传入块对象地址为空", __FILE__, __LINE__);
+		}
+		if (m_nLength < 0)
+		{
+			throw CSddException("序列化长度传入值为负", __FILE__, __LINE__);
+		}
 	}
 
-	CSddStringItem::~CSddStringItem()
+	CSddChunk::~CSddChunk()
 	{
+
 	}
 
-	std::shared_ptr<CSddInterface> CSddStringItem::Creation(std::string& value, size_t nLength)
+	std::shared_ptr<CSddInterface> CSddChunk::Creation(void* pVariate, size_t nLength)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddStringItem>(value, nLength);
+		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddChunk>(pVariate, nLength);
 		if (pItem == nullptr)
 		{
-			throw CSddException("创建字符串数据项失败", __FILE__, __LINE__);
+			throw CSddException("创建块数据项失败", __FILE__, __LINE__);
 		}
 		return pItem;
 	}
 
-	bool CSddStringItem::BufferToData(CBuffReaderBase& rBuffReader)
+	bool CSddChunk::BufferToData(CBuffReaderBase& rBuffReader)
 	{
-		std::vector<char> vector;
-		vector.resize(m_nLength + 1);
-		vector[m_nLength] = 0;
-		if (!rBuffReader.Read(vector.data(), m_nLength))
-		{
-			return false;
-		}
-		m_str = vector.data();
-		return true;
+		return rBuffReader.Read((char*)m_pChunk, m_nLength);
 	}
 
-	void CSddStringItem::DataToBuffer(CBufferBase& rBuffer)
+	void CSddChunk::DataToBuffer(CBufferBase& rBuffer)
 	{
-		std::vector<char> vector;
-		vector.resize(m_nLength + 1);
-		vector[m_nLength] = 0;
-
-		size_t nLength = m_nLength < m_str.size() ? m_nLength : m_str.size();
-		memcpy_s(vector.data(), m_nLength, m_str.data(), nLength);
-		rBuffer.Write(vector.data(), m_nLength);
+		rBuffer.Write((char*)m_pChunk, m_nLength);
 	}
 
 	// 获取序列化或反序列化使用的字节长度
-	size_t CSddStringItem::GetBufferLength()
+	size_t CSddChunk::GetBufferLength()
 	{
 		return m_nLength;
 	}

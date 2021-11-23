@@ -19,42 +19,42 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-#include "SddInclude/SddItem/SddFloatItem.h"
+#include "SddInclude/Sdd/SddObject/SddPlaceholder.h"
 #include "SddInclude/SddException.h"
 
 namespace jaf
 {
-	CSddFloatItem::CSddFloatItem(float& rVariate) :m_f(rVariate)
+	CSddPlaceholder::CSddPlaceholder(size_t nLength, char c) :m_nLength(nLength), m_c(c)
 	{
 	}
 
-	CSddFloatItem::~CSddFloatItem()
+	CSddPlaceholder::~CSddPlaceholder()
 	{
 	}
 
-	std::shared_ptr<CSddInterface> CSddFloatItem::Creation(float& rVariate)
+	std::shared_ptr<CSddInterface> CSddPlaceholder::Creation(size_t nLength, char c)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddFloatItem>(rVariate);
+		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddPlaceholder>(nLength, c);
 		if (pItem == nullptr)
 		{
-			throw CSddException("创建float数据项失败", __FILE__, __LINE__);
+			throw CSddException("创建占位符数据项失败", __FILE__, __LINE__);
 		}
 		return pItem;
 	}
 
-	bool CSddFloatItem::BufferToData(CBuffReaderBase& rBuffReader)
+	bool CSddPlaceholder::BufferToData(CBuffReaderBase& rBuffReader)
 	{
-		return rBuffReader.Read((char*)&m_f, sizeof(float));
+		return rBuffReader.SkipRead(m_nLength);
 	}
 
-	void CSddFloatItem::DataToBuffer(CBufferBase& rBuffer)
+	void CSddPlaceholder::DataToBuffer(CBufferBase& rBuffer)
 	{
-		rBuffer.Write((char*)&m_f, sizeof(float));
+		rBuffer.WriteChar(m_c, m_nLength);
 	}
 
-	size_t CSddFloatItem::GetBufferLength()
+	size_t CSddPlaceholder::GetBufferLength()
 	{
-		return sizeof(float);
+		return m_nLength;
 	}
 
 } // namespace jaf

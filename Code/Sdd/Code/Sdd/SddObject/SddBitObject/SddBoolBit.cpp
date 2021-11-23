@@ -19,42 +19,43 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-#include "SddInclude/SddItem/SddDoubleItem.h"
-#include "SddInclude/SddException.h"
+#include "SddInclude/Sdd/SddObject/SddBitObject/SddBoolBit.h"
+#include <assert.h>
 
 namespace jaf
 {
-	CSddDoubleItem::CSddDoubleItem(double& rVariate) :m_f(rVariate)
+	CSddBoolBit::CSddBoolBit(bool& rBool, size_t nBitIndex) :m_rBool(rBool), m_nBitIndex(nBitIndex)
 	{
 	}
 
-	CSddDoubleItem::~CSddDoubleItem()
+	CSddBoolBit::~CSddBoolBit()
 	{
 	}
 
-	std::shared_ptr<CSddInterface> CSddDoubleItem::Creation(double& rVariate)
+	bool CSddBoolBit::BufferToData(const char* pBuff, size_t nLength)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddDoubleItem>(rVariate);
-		if (pItem == nullptr)
-		{
-			throw CSddException("创建double数据项失败", __FILE__, __LINE__);
-		}
-		return pItem;
+		assert(nLength * 8 > m_nBitIndex); // 缓冲区必须要住够长
+		const char* p = pBuff + m_nBitIndex / 8; // 找到要反序列化的字符地址
+		size_t nIndex = m_nBitIndex % 8; // 找到反序列化的位索引
+
+		char c = 0x01 << nIndex;
+		c &= *p;
+		m_rBool = (bool)c;
+
+		return true;
 	}
 
-	bool CSddDoubleItem::BufferToData(CBuffReaderBase& rBuffReader)
+	bool CSddBoolBit::DataToBuffer(char* pBuff, size_t nLength)
 	{
-		return rBuffReader.Read((char*)&m_f, sizeof(double));
-	}
+		assert(nLength * 8 > m_nBitIndex); // 缓冲区必须要住够长
+		char* p = pBuff + m_nBitIndex / 8; // 找到要序列化的字符地址
+		size_t nIndex = m_nBitIndex % 8; // 找到序列化的位索引
 
-	void CSddDoubleItem::DataToBuffer(CBufferBase& rBuffer)
-	{
-		rBuffer.Write((char*)&m_f, sizeof(double));
-	}
+		char c = (char)m_rBool;
+		c <<= nIndex;
+		*p |= c;
 
-	size_t CSddDoubleItem::GetBufferLength()
-	{
-		return sizeof(double);
+		return true;
 	}
 
 } // namespace jaf

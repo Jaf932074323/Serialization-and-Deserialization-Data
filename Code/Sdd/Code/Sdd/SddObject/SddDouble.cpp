@@ -19,42 +19,42 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-#include "SddInclude/SddItem/SddPlaceholderItem.h"
+#include "SddInclude/Sdd/SddObject/SddDouble.h"
 #include "SddInclude/SddException.h"
 
 namespace jaf
 {
-	CSddPlaceholderItem::CSddPlaceholderItem(size_t nLength, char c) :m_nLength(nLength), m_c(c)
+	CSddDouble::CSddDouble(double& rVariate) :m_f(rVariate)
 	{
 	}
 
-	CSddPlaceholderItem::~CSddPlaceholderItem()
+	CSddDouble::~CSddDouble()
 	{
 	}
 
-	std::shared_ptr<CSddInterface> CSddPlaceholderItem::Creation(size_t nLength, char c)
+	std::shared_ptr<CSddInterface> CSddDouble::Creation(double& rVariate)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddPlaceholderItem>(nLength, c);
+		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddDouble>(rVariate);
 		if (pItem == nullptr)
 		{
-			throw CSddException("创建占位符数据项失败", __FILE__, __LINE__);
+			throw CSddException("创建double数据项失败", __FILE__, __LINE__);
 		}
 		return pItem;
 	}
 
-	bool CSddPlaceholderItem::BufferToData(CBuffReaderBase& rBuffReader)
+	bool CSddDouble::BufferToData(CBuffReaderBase& rBuffReader)
 	{
-		return rBuffReader.SkipRead(m_nLength);
+		return rBuffReader.Read((char*)&m_f, sizeof(double));
 	}
 
-	void CSddPlaceholderItem::DataToBuffer(CBufferBase& rBuffer)
+	void CSddDouble::DataToBuffer(CBufferBase& rBuffer)
 	{
-		rBuffer.WriteChar(m_c, m_nLength);
+		rBuffer.Write((char*)&m_f, sizeof(double));
 	}
 
-	size_t CSddPlaceholderItem::GetBufferLength()
+	size_t CSddDouble::GetBufferLength()
 	{
-		return m_nLength;
+		return sizeof(double);
 	}
 
 } // namespace jaf

@@ -16,17 +16,8 @@
     <Filter Include="Code">
       <UniqueIdentifier>{908a1a99-1de6-45df-addd-1fbca21c1ba3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Code\SddItem">
-      <UniqueIdentifier>{a4fa020c-2368-447e-af28-a7dc94a851f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\SddObject">
-      <UniqueIdentifier>{e8479a48-e6c7-4d42-819e-50425357ff6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Code\SddEndian">
       <UniqueIdentifier>{dc0dac41-f7ff-495c-970d-2b5e8afd104a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Code\SddItem\SddBitItem">
-      <UniqueIdentifier>{e0141a01-6a2a-4cf1-8c42-f758626710fe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Code\ParsePackage">
       <UniqueIdentifier>{684613bb-1274-4aa7-8767-92eb32943070}</UniqueIdentifier>
@@ -43,10 +34,19 @@
     <Filter Include="SddInclude">
       <UniqueIdentifier>{b2740be0-9495-4573-bfed-8d89a170f4c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Code\Sdd">
+      <UniqueIdentifier>{e8479a48-e6c7-4d42-819e-50425357ff6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Sdd\SddObject">
+      <UniqueIdentifier>{a4fa020c-2368-447e-af28-a7dc94a851f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code\Sdd\SddObject\SddBitObject">
+      <UniqueIdentifier>{e0141a01-6a2a-4cf1-8c42-f758626710fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\SddObject\SddBase.cpp">
-      <Filter>Code\SddObject</Filter>
+    <ClCompile Include="Code\Sdd\SddBase.cpp">
+      <Filter>Code\Sdd</Filter>
     </ClCompile>
     <ClCompile Include="Code\SddEndian\SddEndianBase.cpp">
       <Filter>Code\SddEndian</Filter>
@@ -60,29 +60,29 @@
     <ClCompile Include="Code\SddEndian\SddEndianNo.cpp">
       <Filter>Code\SddEndian</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddDoubleItem.cpp">
-      <Filter>Code\SddItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddDouble.cpp">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddFloatItem.cpp">
-      <Filter>Code\SddItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddFloat.cpp">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddChunkItem.cpp">
-      <Filter>Code\SddItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddChunk.cpp">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddPlaceholderItem.cpp">
-      <Filter>Code\SddItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddPlaceholder.cpp">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClCompile>
     <ClCompile Include="Code\SddEndian\SddEndianManage.cpp">
       <Filter>Code\SddEndian</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddBitItem\SddBitItem.cpp">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddBitObject\SddBitItem.cpp">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddBitItem\SddBoolBit.cpp">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddBitObject\SddBoolBit.cpp">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClCompile>
-    <ClCompile Include="Code\SddItem\SddBitItem\SddCharBit.cpp">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClCompile Include="Code\Sdd\SddObject\SddBitObject\SddCharBit.cpp">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClCompile>
     <ClCompile Include="Code\Buffer\Buffer.cpp">
       <Filter>Code\Buffer</Filter>
@@ -95,14 +95,14 @@
     <ClInclude Include="SddInclude\SddException.h">
       <Filter>SddInclude</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddStringItem.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddString.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddObject\SddInterface.h">
-      <Filter>Code\SddObject</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddInterface.h">
+      <Filter>Code\Sdd</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddObject\SddBase.h">
-      <Filter>Code\SddObject</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddBase.h">
+      <Filter>Code\Sdd</Filter>
     </ClInclude>
     <ClInclude Include="SddInclude\SddHead.h">
       <Filter>SddInclude</Filter>
@@ -119,35 +119,32 @@
     <ClInclude Include="SddInclude\SddEndian\SddEndianNo.h">
       <Filter>Code\SddEndian</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddIntegerItem.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddInteger.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddFloatItem.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddFloat.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddDoubleItem.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddDouble.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddChunkItem.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddChunk.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddPlaceholderItem.h">
-      <Filter>Code\SddItem</Filter>
-    </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddItemBase.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddPlaceholder.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
     <ClInclude Include="SddInclude\SddEndian\SddEndianManage.h">
       <Filter>Code\SddEndian</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddBitItem.h">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddBitObject\SddBitItem.h">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddBoolBit.h">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddBitObject\SddBoolBit.h">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddCharBit.h">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddBitObject\SddCharBit.h">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClInclude>
     <ClInclude Include="SddInclude\ParsePackage\ParsePackBase.h">
       <Filter>Code\ParsePackage</Filter>
@@ -167,8 +164,8 @@
     <ClInclude Include="SddInclude\Buffer\BuffReader.h">
       <Filter>Code\Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddBitItem\SddBitInterface.h">
-      <Filter>Code\SddItem\SddBitItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddBitObject\SddBitInterface.h">
+      <Filter>Code\Sdd\SddObject\SddBitObject</Filter>
     </ClInclude>
     <ClInclude Include="SddInclude\Buffer\BufferBase.h">
       <Filter>Code\Buffer</Filter>
@@ -197,11 +194,17 @@
     <ClInclude Include="SddInclude\TypeDefine.h">
       <Filter>SddInclude</Filter>
     </ClInclude>
-    <ClInclude Include="SddInclude\SddItem\SddVariLenStringItem.h">
-      <Filter>Code\SddItem</Filter>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddVariLenString.h">
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
     <ClInclude Include="SddInclude\ExportDefine.h">
       <Filter>SddInclude</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\公司\CommWithTrain\CommWithTrain\CommWithTrain\Code\Include\SddInclude\SddItem\CSddVector.h">
+      <Filter>Code\Sdd\SddObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddExtendAction.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

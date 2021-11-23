@@ -25,7 +25,7 @@
 时间:2020-12-07
 描述:可序列化数据包基类
 **************************************************************************/
-#include "SddObject/SddBase.h"
+#include "SddInclude/Sdd/SddBase.h"
 
 namespace jaf
 {

@@ -26,26 +26,26 @@
 描述:序列化和反序列化整数项
 **************************************************************************/
 #include <assert.h>
-#include "SddException.h"
-#include "SddItem/SddItemBase.h"
+#include "SddInclude/SddException.h"
+#include "SddInclude/Sdd/SddInterface.h"
 
 // 创建整数的序列化反序列化的数据项
-#define SDD_INTERGER(T,rEndian,rT, ...) jaf::CSddIntegerItem<T>::Creation(rEndian, rT, ## __VA_ARGS__)
+#define SDD_INTERGER(T,rEndian,rT, ...) jaf::CSddInteger<T>::Creation(rEndian, rT, ## __VA_ARGS__)
 
 namespace jaf
 {
 
 	template<typename T>
-	// 整数的序列化反序列化的数据项
-	// T 类型，可以是int/size_t/short int/unsigned short int/long/unsigned long等等
-	class CSddIntegerItem :public CSddItemBase
+	// 整数的序列化反序列化通用对象
+	// T 整数类型，可以是int/size_t/short int/unsigned short int/long/unsigned long等等
+	class CSddInteger :public CSddInterface
 	{
 	public:
-		// 序列化和反序列化的通用的数据项
+		// 整数的序列化和反序列化的通用对象
 		// m_rEndian 端序
 		// pT要序列化、反序列化数据的地址
 		// nBitLength 要序列化的长度 如果为0，则全部序列化
-		CSddIntegerItem(CSddEndianBase& rEndian, T& rT, size_t nLength = 0) :m_rEndian(rEndian), m_rT(rT), m_nLength(nLength)
+		CSddInteger(CSddEndianBase& rEndian, T& rT, size_t nLength = 0) :m_rEndian(rEndian), m_rT(rT), m_nLength(nLength)
 		{
 			if ((0 != m_nLength) && (m_nLength > sizeof(T)))
 			{
@@ -62,14 +62,14 @@ namespace jaf
 			}
 		}
 
-		~CSddIntegerItem(void)
+		~CSddInteger(void)
 		{
 		}
 
-		// 创建double浮点数的序列化和反序列化的数据项
+		// 创建整数的序列化和反序列化对象
 		static std::shared_ptr<CSddInterface> Creation(CSddEndianBase& m_rEndian, T& rT, size_t nLength = 0)
 		{
-			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddIntegerItem>(m_rEndian, rT, nLength);
+			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddInteger>(m_rEndian, rT, nLength);
 			if (pItem == nullptr)
 			{
 				throw CSddException("创建double数据项失败", __FILE__, __LINE__);

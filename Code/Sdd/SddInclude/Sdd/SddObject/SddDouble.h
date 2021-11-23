@@ -1,3 +1,4 @@
+#pragma once
 //MIT License
 //
 //Copyright(c) 2021 Jaf932074323 姜安富
@@ -19,43 +20,44 @@
 //LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
-#include "SddInclude/SddItem\SddBitItem\SddBoolBit.h"
-#include <assert.h>
+/**************************************************************************
+作者:姜安富
+时间:2020/11/5
+描述:序列化和反序列化double浮点数项
+**************************************************************************/
+#include <memory>
+#include "SddInclude/Sdd/SddInterface.h"
+
+// 创建double数据项序列化反序列化对象
+#define SDD_DOUBLE(rVariate) jaf::CSddDouble::Creation(rVariate)
 
 namespace jaf
 {
-	CSddBoolBit::CSddBoolBit(bool& rBool, size_t nBitIndex) :m_rBool(rBool), m_nBitIndex(nBitIndex)
+
+	// double的序列化和反序列化对象
+	class SDD_EXPORT CSddDouble :public CSddInterface
 	{
-	}
+	public:
+		CSddDouble(double& rVariate);
+		~CSddDouble();
+		// 创建double浮点数的序列化和反序列化对象
+		static std::shared_ptr<CSddInterface> Creation(double& rVariate);
 
-	CSddBoolBit::~CSddBoolBit()
-	{
-	}
+		// 从缓冲区中读取数据
+		// rBuffer 缓冲区
+		// 成功返回true,失败返回false
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader);
+		// 将数据写入到缓冲区
+		// rBuffer 缓冲区
+		// 成功返回true,失败返回false
+		virtual void DataToBuffer(CBufferBase& rBuffer);
+		// 获取序列化或反序列化使用的字节长度
+		virtual size_t GetBufferLength();
 
-	bool CSddBoolBit::BufferToData(const char* pBuff, size_t nLength)
-	{
-		assert(nLength * 8 > m_nBitIndex); // 缓冲区必须要住够长
-		const char* p = pBuff + m_nBitIndex / 8; // 找到要反序列化的字符地址
-		size_t nIndex = m_nBitIndex % 8; // 找到反序列化的位索引
+	protected:
+		double& m_f;
+	};
 
-		char c = 0x01 << nIndex;
-		c &= *p;
-		m_rBool = (bool)c;
-
-		return true;
-	}
-
-	bool CSddBoolBit::DataToBuffer(char* pBuff, size_t nLength)
-	{
-		assert(nLength * 8 > m_nBitIndex); // 缓冲区必须要住够长
-		char* p = pBuff + m_nBitIndex / 8; // 找到要序列化的字符地址
-		size_t nIndex = m_nBitIndex % 8; // 找到序列化的位索引
-
-		char c = (char)m_rBool;
-		c <<= nIndex;
-		*p |= c;
-
-		return true;
-	}
 
 } // namespace jaf
+

@@ -22,34 +22,42 @@
 //SOFTWARE.
 /**************************************************************************
 作者:姜安富
-时间:2020/11/12
-描述:对布尔位项的序列化和反序列化
+时间:2020/11/5
+描述:序列化和反序列化float浮点数项
 **************************************************************************/
-#include "SddInclude/SddItem/SddBitItem/SddBitInterface.h"
+#include <memory>
+#include "SddInclude/Sdd/SddInterface.h"
+
+// 创建float数据项序列化反序列化对象
+#define SDD_FLOAT(rVariate) jaf::CSddFloat::Creation(rVariate)
 
 namespace jaf
 {
-	class SDD_EXPORT CSddBoolBit :public CSddBitInterface
+
+	// 字符串的序列化和反序列化对象
+	class SDD_EXPORT CSddFloat :public CSddInterface
 	{
 	public:
-		CSddBoolBit(bool& rBool, size_t nBitIndex);
-		~CSddBoolBit();
+		CSddFloat(float& rVariate);
+		~CSddFloat();
+		// 创建double浮点数的序列化和反序列化对象
+		static std::shared_ptr<CSddInterface> Creation(float& rVariate);
 
-		// 从缓冲区中读取位数据
-		// pBuff 缓冲区
-		// nLength 缓冲区总长度
+		// 从缓冲区中读取数据
+		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool BufferToData(const char* pBuff, size_t nLength);
-		// 将位数据写入到缓冲区
-		// pBuff 缓冲区
-		// nLength 缓冲区总长度
+		virtual bool BufferToData(CBuffReaderBase& rBuffReader);
+		// 将数据写入到缓冲区
+		// rBuffer 缓冲区
 		// 成功返回true,失败返回false
-		virtual bool DataToBuffer(char* pBuff, size_t nLength);
+		virtual void DataToBuffer(CBufferBase& rBuffer);
+		// 获取序列化或反序列化使用的字节长度
+		virtual size_t GetBufferLength();
 
 	protected:
-		bool& m_rBool; // 要序列化的布尔值的引用
-		size_t m_nBitIndex; // 序列化到的位索引
+		float& m_f;
 	};
 
 } // namespace jaf
+
 

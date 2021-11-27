@@ -28,6 +28,7 @@
 #include <assert.h>
 #include "SddInclude/SddException.h"
 #include "SddInclude/Sdd/SddInterface.h"
+#include "SddInclude/SddEndian/SddEndianBase.h"
 
 // 创建整数的序列化反序列化的数据项
 #define SDD_INTERGER(T,rEndian,rT, ...) jaf::CSddInteger<T>::Creation(rEndian, rT, ## __VA_ARGS__)
@@ -67,9 +68,9 @@ namespace jaf
 		}
 
 		// 创建整数的序列化和反序列化对象
-		static std::shared_ptr<CSddInterface> Creation(CSddEndianBase& m_rEndian, T& rT, size_t nLength = 0)
+		static std::shared_ptr<CSddInteger<T>> Creation(CSddEndianBase& m_rEndian, T& rT, size_t nLength = 0)
 		{
-			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddInteger>(m_rEndian, rT, nLength);
+			std::shared_ptr<CSddInteger<T>> pItem = std::make_shared<CSddInteger>(m_rEndian, rT, nLength);
 			if (pItem == nullptr)
 			{
 				throw CSddException("创建double数据项失败", __FILE__, __LINE__);

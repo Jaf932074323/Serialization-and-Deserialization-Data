@@ -46,9 +46,9 @@ namespace jaf
 		~CSddVariLenString() {}
 
 		// 创建变长字符串的序列化和反序列化对象
-		static std::shared_ptr<CSddInterface> Creation(std::string& value)
+		static std::shared_ptr<CSddVariLenString> Creation(std::string& value)
 		{
-			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddVariLenString>(value);
+			std::shared_ptr<CSddVariLenString> pItem = std::make_shared<CSddVariLenString>(value);
 			if (pItem == nullptr)
 			{
 				throw CSddException("创建字符串数据项失败", __FILE__, __LINE__);

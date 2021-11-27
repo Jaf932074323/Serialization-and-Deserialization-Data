@@ -43,7 +43,7 @@ namespace jaf
 		CSddPlaceholder(size_t nLength, char c = 0x00);
 		~CSddPlaceholder();
 		// 创建d占位对象的序列化和反序列化对象
-		static std::shared_ptr<CSddInterface> Creation(size_t nLength, char c = 0x00);
+		static std::shared_ptr<CSddPlaceholder> Creation(size_t nLength, char c = 0x00);
 
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区

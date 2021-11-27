@@ -46,7 +46,7 @@ namespace jaf
 		CSddChunk(void* pVariate, size_t nLength);
 		~CSddChunk();
 		// 创建字符串的序列化和反序列化的数据项
-		static std::shared_ptr<CSddInterface> Creation(void* pVariate, size_t nLength);
+		static std::shared_ptr<CSddChunk> Creation(void* pVariate, size_t nLength);
 
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区

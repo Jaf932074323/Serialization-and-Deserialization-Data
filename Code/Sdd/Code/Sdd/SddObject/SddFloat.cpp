@@ -32,9 +32,9 @@ namespace jaf
 	{
 	}
 
-	std::shared_ptr<CSddInterface> CSddFloat::Creation(float& rVariate)
+	std::shared_ptr<CSddFloat> CSddFloat::Creation(float& rVariate)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddFloat>(rVariate);
+		std::shared_ptr<CSddFloat> pItem = std::make_shared<CSddFloat>(rVariate);
 		if (pItem == nullptr)
 		{
 			throw CSddException("创建float数据项失败", __FILE__, __LINE__);

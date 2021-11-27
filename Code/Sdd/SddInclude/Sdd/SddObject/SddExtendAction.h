@@ -33,24 +33,60 @@
 
 namespace jaf
 {
-	class CSddExtendAction:public CSddInterface
+	// 序列化和反序列化 用户扩展行为
+	class CSddExtendAct:public CSddInterface
 	{
 	public:
-		CSddExtendAction(const std::function<bool(CBuffReaderBase&)>& funBufferToData
-			, const std::function<void(CBufferBase&)>& funDataToBuffer)
+		// 构造函数
+		// funBufferToData 用户定义从缓冲区中读取数据行为
+		// funDataToBuffer 用户定义从写入数据到缓冲区行为
+		CSddExtendAct(std::function<bool(CBuffReaderBase&)> funBufferToData
+			, std::function<void(CBufferBase&)> funDataToBuffer)
 			:m_funBufferToData(funBufferToData), m_funDataToBuffer(funDataToBuffer)
 		{
 		}
 
-		~CSddExtendAction()
+		CSddExtendAct(std::function<bool(CBuffReaderBase&)> funBufferToData)
+			:m_funBufferToData(funBufferToData)
+		{
+		}
+
+		CSddExtendAct(std::function<void(CBufferBase&)> funDataToBuffer)
+			:m_funDataToBuffer(funDataToBuffer)
+		{
+		}
+
+		~CSddExtendAct()
 		{
 		}
 
 		// 创建字符串的序列化和反序列化的数据项
-		static std::shared_ptr<CSddInterface> Creation(const std::function<void(CBuffReaderBase&)>& funBufferToData
-			, const std::function<void(CBufferBase&)>& funDataToBuffer)
+		static std::shared_ptr<CSddExtendAct> Creation(std::function<bool(CBuffReaderBase&)> funBufferToData
+			, std::function<void(CBufferBase&)> funDataToBuffer)
 		{
-			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddExtendAction>(funBufferToData, funDataToBuffer);
+			std::shared_ptr<CSddExtendAct> pItem = std::make_shared<CSddExtendAct>(funBufferToData, funDataToBuffer);
+			if (pItem == nullptr)
+			{
+				throw CSddException("创建用户扩展行为对象失败", __FILE__, __LINE__);
+			}
+			return pItem;
+		}
+
+		// 创建字符串的序列化和反序列化的数据项
+		static std::shared_ptr<CSddExtendAct> Creation(std::function<bool(CBuffReaderBase&)> funBufferToData)
+		{
+			std::shared_ptr<CSddExtendAct> pItem = std::make_shared<CSddExtendAct>(funBufferToData);
+			if (pItem == nullptr)
+			{
+				throw CSddException("创建用户扩展行为对象失败", __FILE__, __LINE__);
+			}
+			return pItem;
+		}
+
+		// 创建字符串的序列化和反序列化的数据项
+		static std::shared_ptr<CSddExtendAct> Creation(std::function<void(CBufferBase&)> funDataToBuffer)
+		{
+			std::shared_ptr<CSddExtendAct> pItem = std::make_shared<CSddExtendAct>(funDataToBuffer);
 			if (pItem == nullptr)
 			{
 				throw CSddException("创建用户扩展行为对象失败", __FILE__, __LINE__);
@@ -63,13 +99,21 @@ namespace jaf
 		// 成功返回true,失败返回false
 		virtual bool BufferToData(CBuffReaderBase& rBuffReader)
 		{
+			if (m_funBufferToData == nullptr)
+			{
+				return true;
+			}
+
 			return m_funBufferToData(rBuffReader);
 		}
 		// 将数据写入到缓冲区
 		// rBuffer 缓冲区
 		virtual void DataToBuffer(CBufferBase& rBuffer)
 		{
-			m_funDataToBuffer(rBuffer);
+			if (m_funDataToBuffer != nullptr)
+			{
+				m_funDataToBuffer(rBuffer);
+			}
 		}
 
 		// 获取序列化或反序列化使用的字节长度
@@ -79,8 +123,8 @@ namespace jaf
 		}
 
 	protected:
-		std::function<bool(CBuffReaderBase& rBuffReader)> m_funBufferToData;
-		std::function<void(CBufferBase& rBuffer)> m_funDataToBuffer;
+		std::function<bool(CBuffReaderBase& rBuffReader)> m_funBufferToData = nullptr;
+		std::function<void(CBufferBase& rBuffer)> m_funDataToBuffer = nullptr;
 	};
 
 }

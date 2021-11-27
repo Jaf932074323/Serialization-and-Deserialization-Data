@@ -32,9 +32,9 @@ namespace jaf
 	{
 	}
 
-	std::shared_ptr<CSddInterface> CSddDouble::Creation(double& rVariate)
+	std::shared_ptr<CSddDouble> CSddDouble::Creation(double& rVariate)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddDouble>(rVariate);
+		std::shared_ptr<CSddDouble> pItem = std::make_shared<CSddDouble>(rVariate);
 		if (pItem == nullptr)
 		{
 			throw CSddException("创建double数据项失败", __FILE__, __LINE__);

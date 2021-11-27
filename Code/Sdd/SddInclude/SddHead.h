@@ -52,6 +52,8 @@
 #include "Sdd/SddObject/SddVariLenString.h"
 #include "Sdd/SddObject/SddChunk.h"
 #include "Sdd/SddObject/SddPlaceholder.h"
+#include "Sdd/SddObject/SddVector.h"
+#include "Sdd/SddObject/SddExtendAction.h"
 // 序列化和反序列化单项中位相关
 #include "Sdd/SddObject/SddBitObject/SddBitInterface.h"
 #include "Sdd/SddObject/SddBitObject/SddBitItem.h"

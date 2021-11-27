@@ -41,9 +41,9 @@ namespace jaf
 
 	}
 
-	std::shared_ptr<CSddInterface> CSddChunk::Creation(void* pVariate, size_t nLength)
+	std::shared_ptr<CSddChunk> CSddChunk::Creation(void* pVariate, size_t nLength)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddChunk>(pVariate, nLength);
+		std::shared_ptr<CSddChunk> pItem = std::make_shared<CSddChunk>(pVariate, nLength);
 		if (pItem == nullptr)
 		{
 			throw CSddException("创建块数据项失败", __FILE__, __LINE__);

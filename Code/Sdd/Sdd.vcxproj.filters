@@ -200,11 +200,11 @@
     <ClInclude Include="SddInclude\ExportDefine.h">
       <Filter>SddInclude</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\公司\CommWithTrain\CommWithTrain\CommWithTrain\Code\Include\SddInclude\SddItem\CSddVector.h">
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddVector.h">
       <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
     <ClInclude Include="SddInclude\Sdd\SddObject\SddExtendAction.h">
-      <Filter>头文件</Filter>
+      <Filter>Code\Sdd\SddObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

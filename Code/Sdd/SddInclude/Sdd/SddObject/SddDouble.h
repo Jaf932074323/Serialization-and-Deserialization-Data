@@ -41,7 +41,7 @@ namespace jaf
 		CSddDouble(double& rVariate);
 		~CSddDouble();
 		// 创建double浮点数的序列化和反序列化对象
-		static std::shared_ptr<CSddInterface> Creation(double& rVariate);
+		static std::shared_ptr<CSddDouble> Creation(double& rVariate);
 
 		// 从缓冲区中读取数据
 		// rBuffer 缓冲区

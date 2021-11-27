@@ -72,25 +72,46 @@ public:
 
 	virtual void Initialize()
 	{
-		SDD_ADD_ITEM(SDD_STRING(m_strName, 5));
-		SDD_ADD_ITEM(SDD_INTERGER(int, m_rEndian, m_nNumber1, 4));
-		SDD_ADD_ITEM(SDD_INTERGER(int, m_rEndian, m_nNumber2, 2));
-		SDD_ADD_ITEM(SDD_INTERGER(int, m_rEndian, m_nNumber3, 4));
-		SDD_ADD_ITEM(SDD_INTERGER(size_t, m_rEndian, m_nUnsignedNumber, 2));
-		SDD_ADD_ITEM(SDD_INTERGER(short, m_rEndian, m_nShort, 2));
-		SDD_ADD_ITEM(SDD_INTERGER(char, m_rEndian, m_c, 1));
-		SDD_ADD_ITEM(SDD_DOUBLE(m_d));
-		SDD_ADD_ITEM(SDD_FLOAT(m_f));
-		SDD_ADD_ITEM(SDD_CHUNK((void*)&m_chunk, sizeof(SChunk)));
-		SDD_ADD_ITEM(SDD_PLACEHOLDER(2, 'a'));
+		AddChildItem(SDD_STRING(m_strName, 5));
+		AddChildItem(SDD_INTERGER(int, m_rEndian, m_nNumber1, 4));
+		AddChildItem(SDD_INTERGER(int, m_rEndian, m_nNumber2, 2));
+		AddChildItem(SDD_INTERGER(int, m_rEndian, m_nNumber3, 4));
+		AddChildItem(SDD_INTERGER(size_t, m_rEndian, m_nUnsignedNumber, 2));
+		AddChildItem(SDD_INTERGER(short, m_rEndian, m_nShort, 2));
+		AddChildItem(SDD_INTERGER(char, m_rEndian, m_c, 1));
+		AddChildItem(SDD_DOUBLE(m_d));
+		AddChildItem(SDD_FLOAT(m_f));
+		AddChildItem(SDD_CHUNK((void*)&m_chunk, sizeof(SChunk)));
+		AddChildItem(SDD_PLACEHOLDER(2, 'a'));
 
-		std::shared_ptr<jaf::CSddBitItem> item = std::make_shared<jaf::CSddBitItem>(4);
-		item->AddChildBitItem(std::make_shared<jaf::CSddBoolBit>(m_b1, 0));
-		item->AddChildBitItem(std::make_shared<jaf::CSddBoolBit>(m_b2, 1));
-		item->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit1, 2, 7));
-		item->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit2, 9, 5));
-		item->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit3, 16, 8));
-		SDD_ADD_ITEM(item);
+		std::shared_ptr<jaf::CSddBitItem> pBitItem = std::make_shared<jaf::CSddBitItem>(4);
+		pBitItem->AddChildBitItem(std::make_shared<jaf::CSddBoolBit>(m_b1, 0));
+		pBitItem->AddChildBitItem(std::make_shared<jaf::CSddBoolBit>(m_b2, 1));
+		pBitItem->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit1, 2, 7));
+		pBitItem->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit2, 9, 5));
+		pBitItem->AddChildBitItem(std::make_shared<jaf::CSddCharBit>(m_cBit3, 16, 8));
+		AddChildItem(pBitItem);
+
+		// vector的序列化没找到更好的实现方式
+		auto sddLen = SDD_INTERGER(unsigned, m_rEndian, m_nVectorLen, 4);
+		auto sddItem = SDD_INTERGER(int, m_rEndian, m_nVectorItem, 4);
+		auto sddVector = jaf::CSddVector<int, jaf::CSddInteger<int>>::Creation(m_vector, sddItem, m_nVectorItem);
+		auto funSetVectorLen = [=](jaf::CBuffReaderBase& funBufferToData)->bool
+		{
+			sddVector->SetLen(m_nVectorLen);
+			return true;
+		};
+		auto funGetVectorLen = [this](jaf::CBufferBase& funDataToBuffer) 
+		{
+			m_nVectorLen = (unsigned)m_vector.size();
+		};
+		auto sddActSetVectorLen = jaf::CSddExtendAct::Creation(funSetVectorLen);
+		auto sddActGetVectorLen = jaf::CSddExtendAct::Creation(funGetVectorLen);
+
+		AddChildItem(sddActGetVectorLen);
+		AddChildItem(sddLen);
+		AddChildItem(sddActSetVectorLen);
+		AddChildItem(sddVector);
 	}
 
 public:
@@ -130,6 +151,10 @@ public:
 	char m_cBit1 = 0x00;
 	char m_cBit2 = 0x00;
 	char m_cBit3 = 0x00;
+
+	int m_nVectorItem = 0;
+	std::vector<int> m_vector;
+	unsigned m_nVectorLen = (unsigned)m_vector.size();
 };
 
 void TestSdd()
@@ -157,6 +182,9 @@ void TestSdd()
 	test1.m_cBit1 = (char)0xff;
 	test1.m_cBit2 = (char)0xff;
 	test1.m_cBit3 = (char)0xff;
+	test1.m_vector.push_back(1);
+	test1.m_vector.push_back(2);
+	test1.m_vector.push_back(3);
 
 	test1.DataToBuffer(buffer);
 	buffReader.Attach(buffer.GetBuffer(), buffer.GetWriteLength());

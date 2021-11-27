@@ -32,9 +32,9 @@ namespace jaf
 	{
 	}
 
-	std::shared_ptr<CSddInterface> CSddPlaceholder::Creation(size_t nLength, char c)
+	std::shared_ptr<CSddPlaceholder> CSddPlaceholder::Creation(size_t nLength, char c)
 	{
-		std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddPlaceholder>(nLength, c);
+		std::shared_ptr<CSddPlaceholder> pItem = std::make_shared<CSddPlaceholder>(nLength, c);
 		if (pItem == nullptr)
 		{
 			throw CSddException("创建占位符数据项失败", __FILE__, __LINE__);

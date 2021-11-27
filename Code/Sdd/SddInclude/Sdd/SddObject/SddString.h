@@ -49,9 +49,9 @@ namespace jaf
 		}
 
 		// 创建字符串的序列化和反序列化对象
-		static std::shared_ptr<CSddInterface> Creation(std::string& value, size_t nLength)
+		static std::shared_ptr<CSddString> Creation(std::string& value, size_t nLength)
 		{
-			std::shared_ptr<CSddInterface> pItem = std::make_shared<CSddString>(value, nLength);
+			std::shared_ptr<CSddString> pItem = std::make_shared<CSddString>(value, nLength);
 			if (pItem == nullptr)
 			{
 				throw CSddException("创建字符串数据项失败", __FILE__, __LINE__);

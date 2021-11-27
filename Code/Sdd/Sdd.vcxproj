@@ -186,7 +186,6 @@
     <ClCompile Include="Code\Sdd\SddBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\公司\CommWithTrain\CommWithTrain\CommWithTrain\Code\Include\SddInclude\SddItem\CSddVector.h" />
     <ClInclude Include="SddInclude\Buffer\Buffer.h" />
     <ClInclude Include="SddInclude\Buffer\BufferBase.h" />
     <ClInclude Include="SddInclude\Buffer\BuffReader.h" />
@@ -221,6 +220,7 @@
     <ClInclude Include="SddInclude\Sdd\SddObject\SddVariLenString.h" />
     <ClInclude Include="SddInclude\Sdd\SddBase.h" />
     <ClInclude Include="SddInclude\Sdd\SddInterface.h" />
+    <ClInclude Include="SddInclude\Sdd\SddObject\SddVector.h" />
     <ClInclude Include="SddInclude\TestPackAndUnpack.h" />
     <ClInclude Include="SddInclude\TestSdd.h" />
     <ClInclude Include="SddInclude\TypeDefine.h" />

@@ -72,31 +72,31 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(ProjectDir)..\..\Product\$(ProjectName)\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(ProjectDir)..\..\Middle\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)Sdd\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -108,10 +108,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Sdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\Sdd.dll $(OutDir)Sdd.dll</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -128,10 +129,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Sdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\Sdd.dll $(OutDir)Sdd.dll</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,10 +146,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Sdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\Sdd.dll $(OutDir)Sdd.dll</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -164,14 +167,53 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Sdd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)..\Product\Sdd\$(Configuration)\$(Platform)\Sdd.dll $(OutDir)Sdd.dll</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SddInclude\Buffer\Buffer.h" />
+    <ClInclude Include="..\SddInclude\Buffer\BufferBase.h" />
+    <ClInclude Include="..\SddInclude\Buffer\BuffReader.h" />
+    <ClInclude Include="..\SddInclude\Buffer\BuffReaderBase.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\DealPackInterface.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\FixedHeadAndTail\ParsePackHeadTail.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\PackBase.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\PackFactBase.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\PackFactory.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\ParsePackBase.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\SpecialPack\PackHeadBase.h" />
+    <ClInclude Include="..\SddInclude\ParsePackage\SpecialPack\PackTailBase.h" />
+    <ClInclude Include="..\SddInclude\SddEndian\SddEndianBase.h" />
+    <ClInclude Include="..\SddInclude\SddEndian\SddEndianBig.h" />
+    <ClInclude Include="..\SddInclude\SddEndian\SddEndianLittle.h" />
+    <ClInclude Include="..\SddInclude\SddEndian\SddEndianManage.h" />
+    <ClInclude Include="..\SddInclude\SddEndian\SddEndianNo.h" />
+    <ClInclude Include="..\SddInclude\SddHead.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddBase.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddInterface.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddBitObject\SddBitInterface.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddBitObject\SddBitItem.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddBitObject\SddBoolBit.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddBitObject\SddCharBit.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddChunk.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddDouble.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddExtendAction.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddFloat.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddInteger.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddPlaceholder.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddString.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddVariLenString.h" />
+    <ClInclude Include="..\SddInclude\Sdd\SddObject\SddVector.h" />
+    <ClInclude Include="..\SddInclude\TestPackAndUnpack.h" />
+    <ClInclude Include="..\SddInclude\TestSdd.h" />
+    <ClInclude Include="..\SddInclude\TypeDefine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

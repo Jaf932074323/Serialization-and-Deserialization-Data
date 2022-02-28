@@ -69,10 +69,10 @@ namespace jaf
 			}
 
 			std::vector<char> vector;
-			vector.resize(nPos);
+			vector.resize(nPos + 1);
 			vector[nPos] = 0;
 
-			if (!rBuffReader.Read(vector.data(), nPos))
+			if (!rBuffReader.Read(vector.data(), nPos + 1))
 			{
 				return false;
 			}

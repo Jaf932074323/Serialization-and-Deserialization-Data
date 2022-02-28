@@ -123,7 +123,7 @@ namespace jaf
 		// ·µ»ØÊÇ·ñËÑË÷µ½
 		bool SeekAtOffset(const char* pSeekContent, size_t nSeekContentLength, size_t& rIndex)
 		{
-			for (size_t i = m_nReadOffset; i < m_nLength; ++i)
+			for (size_t i = m_nReadOffset; i + nSeekContentLength <= m_nLength; ++i)
 			{
 				size_t j = 0;
 				for (; j < nSeekContentLength; ++j)
@@ -135,7 +135,7 @@ namespace jaf
 				}
 				if (j >= nSeekContentLength)
 				{
-					rIndex = i;
+					rIndex = i - m_nReadOffset;
 					return true;
 				}
 			}

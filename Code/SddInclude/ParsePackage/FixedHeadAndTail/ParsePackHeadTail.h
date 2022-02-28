@@ -115,7 +115,7 @@ namespace jaf
 
 			// ∂¡»°Œ≤
 			m_rTail.BufferToData(buffReader);
-			if (!m_rTail.Check(m_dataBuffer.GetBuffer(), nContentLen))
+			if (!m_rTail.Check(m_dataBuffer.GetBuffer(), nTotalLen))
 			{
 				m_dataBuffer.PopFront(1);
 				return true;
